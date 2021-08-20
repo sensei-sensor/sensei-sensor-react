@@ -1,11 +1,12 @@
 import React from "react";
 import "./css/reset.css";
 import "./css/common.css";
+import Header from "./components/Header";
 
 function App() {
   return (
     <div>
-      <div>aaaaaaaaaああああああああああああああ</div>
+      <Header />
     </div>
   );
 }
