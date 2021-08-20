@@ -13,7 +13,14 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
 
   color: #ff8c33;
+}
+
+.container {
+  margin: 26px;
+  width: 1000px;
+  height: 500px;
+  background-color: white;
+  border-radius: 20px;
 }
