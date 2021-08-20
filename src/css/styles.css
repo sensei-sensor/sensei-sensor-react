@@ -1,0 +1,19 @@
+header {
+  height: 80px;
+
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+
+  font-family: "Rounded Mplus 1c", sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 48px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  color: #ff8c33;
+}
