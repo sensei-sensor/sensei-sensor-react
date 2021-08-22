@@ -17,5 +17,10 @@
     "string-quotes": "single",
     "order/properties-alphabetical-order": true
   },
-  "ignoreFiles": ["**/node_modules/**", "**/dist/**"]
+  "ignoreFiles": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "package.json",
+    "package-lock.json"
+  ]
 }

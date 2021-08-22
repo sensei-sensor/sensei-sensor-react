@@ -6,19 +6,23 @@
     "build": "vite build",
     "serve": "vite preview",
     "format": "prettier --write --ignore-path .gitignore ./**/*.{js,jsx,html,css,scss,md,json}",
-    "lint": "eslint --fix --ignore-path .gitignore  ./src --ext .js,.jsx",
+    "lint": "eslint --ignore-path .gitignore ./src --ext .js,.jsx",
+    "lint:fix": "eslint --fix --ignore-path .gitignore  ./src --ext .js,.jsx",
     "lint:style": "stylelint --ignore-path .gitignore '**/*.{css,scss,sass}'",
     "lint:style:fix": "stylelint --fix --ignore-path .gitignore '**/*.{css,scss,sass}'",
-    "fix": "npm run format && npm run lint",
+    "fix": "npm run format && npm run lint:fix && npm run lint:style:fix",
     "prepare": "husky install",
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,jsx,json,html,css,scss,md,json}": [
+    "*.{js,jsx,json,html,md,json}": [
       "prettier --write ."
     ],
     ".{js,jsx}": [
       "eslint --fix ."
+    ],
+    "**/*.{css,scss,sass}": [
+      "stylelint --fix ."
     ]
   },
   "dependencies": {
