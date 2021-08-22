@@ -1,26 +1,22 @@
 header {
-  height: 80px;
-
-  background: #ffffff;
+  align-items: center;
+  background: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
-
+  color: #ff8c33;
+  display: flex;
   font-family: "Rounded Mplus 1c", sans-serif;
+  font-size: 32px;
   font-style: normal;
   font-weight: 900;
-  font-size: 32px;
-  line-height: 48px;
-
-  display: flex;
+  height: 80px;
   justify-content: center;
-  align-items: center;
-
-  color: #ff8c33;
+  line-height: 48px;
 }
 
 .container {
-  margin: 26px;
-  width: 1000px;
-  height: 500px;
   background-color: white;
   border-radius: 20px;
+  height: 500px;
+  margin: 26px;
+  width: 1000px;
 }
