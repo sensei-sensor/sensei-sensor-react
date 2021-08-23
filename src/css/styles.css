@@ -15,8 +15,35 @@ header {
 
 .container {
   background-color: white;
-  border-radius: 20px;
+  border-radius: 10px;
   height: 500px;
-  margin: 26px;
-  width: 1000px;
+  margin: 24px;
+  padding: 16px;
+}
+
+.card {
+  align-items: center;
+  background: #fff;
+  border: 1px solid #4cc4ff;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(52, 133, 173, 0.6);
+  box-sizing: border-box;
+  height: 86px;
+  overflow: hidden;
+  padding: 8px;
+  width: 280px;
+}
+
+.low {
+  align-items: center;
+  display: flex;
+}
+
+.userName {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.userStatus {
+  align-items: flex-end;
 }
