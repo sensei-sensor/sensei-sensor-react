@@ -15,7 +15,7 @@ header {
 .container {
   background-color: white;
   border-radius: 10px;
-  height: 500px;
+  height: max-content;
   margin: 24px;
   overflow: auto;
   padding: 16px;
