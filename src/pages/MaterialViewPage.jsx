@@ -1,17 +1,23 @@
 import React from "react";
-import { createTheme, ThemeProvider } from "@material-ui/core/styles";
+import { createTheme } from "@material-ui/core/styles";
 import {
   AppBar,
   Box,
   Button,
   IconButton,
   makeStyles,
+  ThemeProvider,
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import { Menu } from "@material-ui/icons";
+import { blue, deepOrange } from "@material-ui/core/colors";
+import MaterialCard from "../components/MaterialCard";
 
 const theme = createTheme({
+  palette: {
+    primary: deepOrange,
+    secondary: blue,
+  },
   typography: {
     fontFamily: ["Roboto", "Noto Sans JP", "sans-serif"].join(","),
   },
@@ -31,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MaterialViewPage() {
   const classes = useStyles();
+
   return (
     <ThemeProvider theme={theme}>
       <AppBar position="static">
@@ -40,19 +47,16 @@ export default function MaterialViewPage() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
-          >
-            <Menu />
-          </IconButton>
+          />
           <Typography variant="h6" className={classes.title}>
             Sensei Sensor
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">ログイン</Button>
         </Toolbar>
       </AppBar>
       <Box m={2}>
-        <Button variant={"contained"} color={"primary"}>
-          あいうえお
-        </Button>
+        <Typography variant={"h4"}>情報コース</Typography>
+        <MaterialCard />
       </Box>
     </ThemeProvider>
   );
