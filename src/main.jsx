@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { ThemeProvider } from "@material-ui/core";
-import MaterialTheme from "./MaterialTheme";
+import { CssBaseline, ThemeProvider } from "@material-ui/core";
+import MaterialTheme from "./styles/MaterialTheme";
 import MaterialViewPage from "./pages/MaterialViewPage";
-import "./css/reset.css";
 
 ReactDOM.render(
   <React.StrictMode>
+    <CssBaseline />
     <Router>
       <ThemeProvider theme={MaterialTheme}>
         <Route exact path={"/"} component={MaterialViewPage} />

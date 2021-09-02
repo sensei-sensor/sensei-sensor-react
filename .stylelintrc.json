@@ -14,7 +14,7 @@
         ]
       }
     ],
-    "string-quotes": "single",
+    "string-quotes": "double",
     "order/properties-alphabetical-order": true
   },
   "ignoreFiles": ["**/node_modules/**", "**/dist/**", "*.json"]
