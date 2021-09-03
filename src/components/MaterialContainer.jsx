@@ -24,7 +24,7 @@ export default function MaterialContainer() {
         <Typography variant={"h5"}>
           <Box fontWeight={700}>情報コース</Box>
         </Typography>
-        <Box display={"flex"} flexWrap={"wrap"}>
+        <Box display={"flex"} flexWrap={"wrap"} justifyContent={"center"}>
           <MaterialCard />
           <MaterialCard />
           <MaterialCard />
