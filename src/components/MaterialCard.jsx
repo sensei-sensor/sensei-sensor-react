@@ -18,19 +18,6 @@ const useStyles = makeStyles({
   discoveryTime: {
     marginBottom: 12,
   },
-  root: {
-    background: "#FFC599",
-  },
-  header: {
-    background: "#FFFFFF",
-  },
-  title: {
-    flexGrow: 1,
-    fontWeight: 700,
-  },
-  container: {
-    background: "#FFF",
-  },
 });
 
 export default function MaterialCard() {
