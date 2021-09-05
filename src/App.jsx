@@ -1,12 +1,22 @@
 import React from "react";
-import ViewPage from "./pages/ViewPage";
+import { CssBaseline, ThemeProvider } from "@material-ui/core";
+import MaterialTheme from "./styles/MaterialTheme";
+import MaterialHeader from "./components/MaterialHeader";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import MaterialViewPage from "./pages/MaterialViewPage";
+import MaterialUserPage from "./pages/MaterialUserPage";
 
-function App() {
+export default function App() {
   return (
-    <div>
-      <ViewPage />
-    </div>
+    <BrowserRouter>
+      <CssBaseline />
+      <ThemeProvider theme={MaterialTheme}>
+        <MaterialHeader />
+        <Switch>
+          <Route exact path={"/"} component={MaterialViewPage} />
+          <Route path={"/UserPage"} component={MaterialUserPage} />
+        </Switch>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
-
-export default App;

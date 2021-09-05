@@ -1,26 +1,11 @@
 import React from "react";
-import { Box, Container, makeStyles, Typography } from "@material-ui/core";
+import { Box, Container, Typography } from "@material-ui/core";
 import MaterialCard from "./MaterialCard";
 
-export const useStyles = makeStyles({
-  container: {
-    background: "#FFF",
-  },
-});
-
 export default function MaterialContainer() {
-  const classes = useStyles();
-
   return (
-    <Box
-      m={3}
-      p={2}
-      bgcolor={"common.white"}
-      borderRadius={5}
-      display={"flex"}
-      textAlign={"center"}
-    >
-      <Container className={classes.container}>
+    <Container>
+      <Box m={3} pt={2} borderRadius={5} textAlign={"center"} bgcolor={"white"}>
         <Typography variant={"h5"}>
           <Box fontWeight={700}>情報コース</Box>
         </Typography>
@@ -37,7 +22,7 @@ export default function MaterialContainer() {
           <MaterialCard />
           <MaterialCard />
         </Box>
-      </Container>
-    </Box>
+      </Box>
+    </Container>
   );
 }

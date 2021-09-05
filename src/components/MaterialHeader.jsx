@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import MaterialTheme from "../styles/MaterialTheme";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   "@global": {
@@ -29,12 +30,12 @@ export default function MaterialHeader() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color={"common.white"}>
+      <AppBar position="static" color={"default"}>
         <Toolbar>
           <Typography variant="h5" color={"primary"} className={classes.title}>
             <Box fontWeight={700}>College Sensor</Box>
           </Typography>
-          <Button color="primary">
+          <Button color="primary" component={Link} to={"/UserPage"}>
             <Box fontWeight={700}>先生向けログイン</Box>
           </Button>
         </Toolbar>
