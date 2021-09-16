@@ -1,11 +1,11 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   Box,
   Checkbox,
   FormControl,
   FormControlLabel,
   InputLabel,
+  makeStyles,
   Select,
   Typography,
 } from "@material-ui/core";
@@ -19,14 +19,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PublicationTime() {
   const classes = useStyles();
-  const [state, setState] = React.useState({
+  const [time, setTime] = React.useState({
     start: 9,
     end: 17,
   });
 
   const handleChange = (event) => {
-    setState({
-      ...state,
+    setTime({
+      ...time,
       [event.target.name]: event.target.value,
     });
   };
@@ -37,7 +37,7 @@ export default function PublicationTime() {
         <InputLabel>開始時間</InputLabel>
         <Select
           native
-          value={state.start}
+          value={time.start}
           onChange={handleChange}
           label="開始時間"
           inputProps={{
@@ -55,7 +55,7 @@ export default function PublicationTime() {
         <InputLabel>終了時間</InputLabel>
         <Select
           native
-          value={state.end}
+          value={time.end}
           onChange={handleChange}
           label="終了時間"
           inputProps={{

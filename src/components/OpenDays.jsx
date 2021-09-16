@@ -2,16 +2,17 @@ import React from "react";
 import { Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
 
 export default function OpenDays() {
-  const [state, setState] = React.useState({
+  const [day, setDay] = React.useState({
     monday: true,
     tuesday: true,
     wednesday: true,
     thursday: true,
     friday: true,
+    all: true,
   });
 
   const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+    setDay({ ...day, [event.target.name]: event.target.checked });
   };
 
   return (
@@ -19,7 +20,7 @@ export default function OpenDays() {
       <FormControlLabel
         control={
           <Checkbox
-            checked={state.monday}
+            checked={day.monday}
             onChange={handleChange}
             name="monday"
           />
@@ -29,7 +30,7 @@ export default function OpenDays() {
       <FormControlLabel
         control={
           <Checkbox
-            checked={state.tuesday}
+            checked={day.tuesday}
             onChange={handleChange}
             name="tuesday"
           />
@@ -39,7 +40,7 @@ export default function OpenDays() {
       <FormControlLabel
         control={
           <Checkbox
-            checked={state.wednesday}
+            checked={day.wednesday}
             onChange={handleChange}
             name="wednesday"
           />
@@ -49,7 +50,7 @@ export default function OpenDays() {
       <FormControlLabel
         control={
           <Checkbox
-            checked={state.thursday}
+            checked={day.thursday}
             onChange={handleChange}
             name="thursday"
           />
@@ -59,7 +60,7 @@ export default function OpenDays() {
       <FormControlLabel
         control={
           <Checkbox
-            checked={state.friday}
+            checked={day.friday}
             onChange={handleChange}
             name="friday"
           />
@@ -69,7 +70,7 @@ export default function OpenDays() {
       <FormControlLabel
         control={
           <Checkbox
-            checked={state.all}
+            checked={day.all}
             onChange={handleChange}
             name="all"
             color={"primary"}
