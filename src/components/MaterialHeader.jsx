@@ -22,6 +22,7 @@ const useStyles = makeStyles(() => ({
   title: {
     flexGrow: 1,
     fontWeight: 700,
+    textDecoration: "none",
   },
 }));
 
@@ -32,7 +33,13 @@ export default function MaterialHeader() {
     <div className={classes.root}>
       <AppBar position="static" color={"default"}>
         <Toolbar>
-          <Typography variant="h5" color={"primary"} className={classes.title}>
+          <Typography
+            variant="h5"
+            color={"primary"}
+            className={classes.title}
+            component={Link}
+            to={"/"}
+          >
             <Box fontWeight={700}>College Sensor</Box>
           </Typography>
           <Button color="primary" component={Link} to={"/UserPage"}>
