@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Box,
   Card,
@@ -6,6 +5,7 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
+import React from "react";
 
 const useStyles = makeStyles({
   card: {

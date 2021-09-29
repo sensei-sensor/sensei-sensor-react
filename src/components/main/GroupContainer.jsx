@@ -1,5 +1,5 @@
-import React from "react";
 import { Box, Container, Typography } from "@material-ui/core";
+import React from "react";
 import TeacherCard from "./TeacherCard";
 
 export default function GroupContainer() {

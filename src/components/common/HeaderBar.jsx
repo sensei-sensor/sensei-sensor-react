@@ -1,4 +1,3 @@
-import React from "react";
 import {
   AppBar,
   Box,
@@ -7,8 +6,9 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import MaterialTheme from "../../styles/Theme";
+import React from "react";
 import { Link } from "react-router-dom";
+import MaterialTheme from "../../styles/Theme";
 
 const useStyles = makeStyles(() => ({
   "@global": {
