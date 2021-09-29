@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MaterialCard() {
+export default function TeacherCard() {
   const classes = useStyles();
 
   return (

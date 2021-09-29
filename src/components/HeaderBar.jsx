@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function MaterialHeader() {
+export default function HeaderBar() {
   const classes = useStyles();
 
   return (
