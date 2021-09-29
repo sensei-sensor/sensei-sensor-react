@@ -1,9 +1,9 @@
 import React from "react";
 import { Box, Container, IconButton, Typography } from "@material-ui/core";
-import PublicationList from "../components/PublicationList";
-import PublicationTime from "../components/PublicationTime";
-import PublicationDays from "../components/PublicationDays";
-import GroupList from "../components/GroupList";
+import PublicationList from "../components/user/PublicationList";
+import PublicationTime from "../components/user/PublicationTime";
+import PublicationDays from "../components/user/PublicationDays";
+import GroupList from "../components/user/GroupList";
 import { ControlPointRounded } from "@material-ui/icons";
 
 export default function UserPage() {

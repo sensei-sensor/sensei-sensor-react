@@ -1,5 +1,5 @@
 import React from "react";
-import GroupContainer from "../components/GroupContainer";
+import GroupContainer from "../components/main/GroupContainer";
 
 export default function MainPage() {
   return (

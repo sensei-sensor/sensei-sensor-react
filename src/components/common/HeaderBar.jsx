@@ -7,7 +7,7 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import MaterialTheme from "../styles/MaterialTheme";
+import MaterialTheme from "../../styles/Theme";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({

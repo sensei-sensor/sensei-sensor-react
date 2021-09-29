@@ -1,7 +1,7 @@
 import React from "react";
 import { CssBaseline, ThemeProvider } from "@material-ui/core";
-import MaterialTheme from "./styles/MaterialTheme";
-import HeaderBar from "./components/HeaderBar";
+import MaterialTheme from "./styles/Theme";
+import HeaderBar from "./components/common/HeaderBar";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import UserPage from "./pages/UserPage";
