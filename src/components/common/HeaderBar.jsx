@@ -1,4 +1,3 @@
-import React from "react";
 import {
   AppBar,
   Box,
@@ -7,8 +6,9 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import MaterialTheme from "../styles/MaterialTheme";
+import React from "react";
 import { Link } from "react-router-dom";
+import MaterialTheme from "../../styles/Theme";
 
 const useStyles = makeStyles(() => ({
   "@global": {
@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function MaterialHeader() {
+export default function HeaderBar() {
   const classes = useStyles();
 
   return (

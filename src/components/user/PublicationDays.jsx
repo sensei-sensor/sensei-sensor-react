@@ -1,7 +1,7 @@
-import React from "react";
 import { Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
+import React from "react";
 
-export default function OpenDays() {
+export default function PublicationDays() {
   const [day, setDay] = React.useState({
     monday: true,
     tuesday: true,

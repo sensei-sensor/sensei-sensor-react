@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Button,
   Checkbox,
@@ -10,6 +9,7 @@ import {
   makeStyles,
   Paper,
 } from "@material-ui/core";
+import React from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,7 +33,7 @@ function intersection(a, b) {
   return a.filter((value) => b.indexOf(value) !== -1);
 }
 
-export default function TransferList() {
+export default function PublicationList() {
   const classes = useStyles();
   const [checked, setChecked] = React.useState([]);
   const [left, setLeft] = React.useState(["第1演習室"]);
