@@ -1,4 +1,4 @@
-import { CssBaseline, ThemeProvider } from "@material-ui/core";
+import { CssBaseline, Grid, ThemeProvider } from "@material-ui/core";
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HeaderBar from "./components/common/HeaderBar";
@@ -11,11 +11,17 @@ export default function App() {
     <BrowserRouter>
       <CssBaseline />
       <ThemeProvider theme={MaterialTheme}>
-        <HeaderBar />
-        <Switch>
-          <Route exact path={"/"} component={MainPage} />
-          <Route path={"/UserPage"} component={UserPage} />
-        </Switch>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <HeaderBar />
+          </Grid>
+          <Grid item xs={12}>
+            <Switch>
+              <Route exact path={"/"} component={MainPage} />
+              <Route path={"/UserPage"} component={UserPage} />
+            </Switch>
+          </Grid>
+        </Grid>
       </ThemeProvider>
     </BrowserRouter>
   );
