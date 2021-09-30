@@ -1,7 +1,7 @@
 import {
-  Box,
   Card,
   CardContent,
+  Grid,
   makeStyles,
   Typography,
 } from "@material-ui/core";
@@ -24,7 +24,7 @@ export default function TeacherCard() {
   const classes = useStyles();
 
   return (
-    <Box m={2}>
+    <Grid item>
       <Card className={classes.card} variant="outlined">
         <CardContent>
           <Typography variant="h5" component="h2">
@@ -38,6 +38,6 @@ export default function TeacherCard() {
           </Typography>
         </CardContent>
       </Card>
-    </Box>
+    </Grid>
   );
 }

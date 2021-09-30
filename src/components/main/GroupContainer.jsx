@@ -1,28 +1,36 @@
-import { Box, Container, Typography } from "@material-ui/core";
+import { Box, Container, Grid, Typography } from "@material-ui/core";
 import React from "react";
 import TeacherCard from "./TeacherCard";
 
 export default function GroupContainer() {
   return (
-    <Container>
-      <Box m={3} pt={2} borderRadius={5} textAlign={"center"} bgcolor={"white"}>
-        <Typography variant={"h5"}>
-          <Box fontWeight={700}>情報コース</Box>
-        </Typography>
-        <Box display={"flex"} flexWrap={"wrap"} justifyContent={"center"}>
-          <TeacherCard />
-          <TeacherCard />
-          <TeacherCard />
-          <TeacherCard />
-          <TeacherCard />
-          <TeacherCard />
-          <TeacherCard />
-          <TeacherCard />
-          <TeacherCard />
-          <TeacherCard />
-          <TeacherCard />
+    <Grid item>
+      <Container>
+        <Box borderRadius={5} textAlign={"center"} bgcolor={"white"}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography variant={"h5"}>
+                <Box fontWeight={700}>情報コース</Box>
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Grid container spacing={2} justifyContent={"center"}>
+                <TeacherCard />
+                <TeacherCard />
+                <TeacherCard />
+                <TeacherCard />
+                <TeacherCard />
+                <TeacherCard />
+                <TeacherCard />
+                <TeacherCard />
+                <TeacherCard />
+                <TeacherCard />
+                <TeacherCard />
+              </Grid>
+            </Grid>
+          </Grid>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </Grid>
   );
 }
