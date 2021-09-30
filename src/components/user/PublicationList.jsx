@@ -6,9 +6,9 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  makeStyles,
   Paper,
-} from "@material-ui/core";
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import React from "react";
 
 const useStyles = makeStyles((theme) => ({

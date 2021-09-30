@@ -1,4 +1,4 @@
-import { CssBaseline, Grid, ThemeProvider } from "@material-ui/core";
+import { CssBaseline, Grid, ThemeProvider } from "@mui/material";
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HeaderBar from "./components/common/HeaderBar";

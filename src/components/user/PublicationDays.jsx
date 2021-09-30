@@ -1,4 +1,4 @@
-import { Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
+import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import React from "react";
 
 export default function PublicationDays() {

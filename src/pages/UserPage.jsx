@@ -1,5 +1,5 @@
-import { Box, Container, IconButton, Typography } from "@material-ui/core";
-import { ControlPointRounded } from "@material-ui/icons";
+import { ControlPointRounded } from "@mui/icons-material";
+import { Box, Container, IconButton, Typography } from "@mui/material";
 import React from "react";
 import GroupList from "../components/user/GroupList";
 import PublicationDays from "../components/user/PublicationDays";
