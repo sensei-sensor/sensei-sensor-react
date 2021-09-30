@@ -1,11 +1,5 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  makeStyles,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
+import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import React from "react";
 import { Link } from "react-router-dom";
 import MaterialTheme from "../../styles/Theme";
