@@ -1,38 +1,26 @@
-import { Card, CardContent, Grid, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 import React from "react";
 
-const useStyles = makeStyles({
-  card: {
-    minWidth: 275,
-    width: "fit-content",
-  },
-  userName: {
-    fontSize: 14,
-  },
-  discoveryTime: {
-    marginBottom: 12,
-  },
-});
+const card = (
+  <React.Fragment>
+    <CardContent>
+      <Typography variant={"h5"} gutterBottom>
+        吉田先生
+      </Typography>
+      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+        5分前
+      </Typography>
+      <Typography variant="body2">吉田教員室</Typography>
+    </CardContent>
+  </React.Fragment>
+);
 
 export default function TeacherCard() {
-  const classes = useStyles();
-
   return (
     <Grid item>
-      <Card className={classes.card} variant="outlined">
-        <CardContent>
-          <Typography variant="h5" component="h2">
-            吉田先生
-          </Typography>
-          <Typography className={classes.discoveryTime} color="textSecondary">
-            5分前
-          </Typography>
-          <Typography variant="body2" component="p">
-            吉田教員室
-          </Typography>
-        </CardContent>
-      </Card>
+      <Box sx={{ minWidth: 275 }}>
+        <Card variant="outlined">{card}</Card>
+      </Box>
     </Grid>
   );
 }

@@ -6,7 +6,7 @@ export default function GroupContainer() {
   return (
     <Grid item>
       <Container>
-        <Box borderRadius={5} textAlign={"center"} bgcolor={"white"}>
+        <Box borderRadius={2} pb={2} textAlign={"center"} bgcolor={"white"}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Typography variant={"h5"}>
@@ -14,7 +14,7 @@ export default function GroupContainer() {
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              <Grid container spacing={2} justifyContent={"center"}>
+              <Grid container spacing={3} justifyContent={"center"}>
                 <TeacherCard />
                 <TeacherCard />
                 <TeacherCard />

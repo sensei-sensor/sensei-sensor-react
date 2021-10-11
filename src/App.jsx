@@ -11,7 +11,7 @@ export default function App() {
     <BrowserRouter>
       <CssBaseline />
       <ThemeProvider theme={MaterialTheme}>
-        <Grid container spacing={3}>
+        <Grid container spacing={4}>
           <Grid item xs={12}>
             <HeaderBar />
           </Grid>
