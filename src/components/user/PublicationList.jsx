@@ -8,22 +8,7 @@ import {
   ListItemText,
   Paper,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import React from "react";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: "auto",
-  },
-  paper: {
-    width: 200,
-    height: 230,
-    overflow: "auto",
-  },
-  button: {
-    margin: theme.spacing(0.5, 0),
-  },
-}));
 
 function not(a, b) {
   return a.filter((value) => b.indexOf(value) === -1);
@@ -34,10 +19,9 @@ function intersection(a, b) {
 }
 
 export default function PublicationList() {
-  const classes = useStyles();
   const [checked, setChecked] = React.useState([]);
-  const [left, setLeft] = React.useState(["第1演習室"]);
-  const [right, setRight] = React.useState(["5I 教室", "教員室"]);
+  const [left, setLeft] = React.useState([0, 1, 2, 3]);
+  const [right, setRight] = React.useState([4, 5, 6, 7]);
 
   const leftChecked = intersection(checked, left);
   const rightChecked = intersection(checked, right);
@@ -78,7 +62,7 @@ export default function PublicationList() {
   };
 
   const customList = (items) => (
-    <Paper className={classes.paper}>
+    <Paper sx={{ width: 200, height: 230, overflow: "auto" }}>
       <List dense component="div" role="list">
         {items.map((value) => {
           const labelId = `transfer-list-item-${value}-label`;
@@ -95,10 +79,12 @@ export default function PublicationList() {
                   checked={checked.indexOf(value) !== -1}
                   tabIndex={-1}
                   disableRipple
-                  inputProps={{ "aria-labelledby": labelId }}
+                  inputProps={{
+                    "aria-labelledby": labelId,
+                  }}
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={`${value}`} />
+              <ListItemText id={labelId} primary={`List item ${value + 1}`} />
             </ListItem>
           );
         })}
@@ -108,53 +94,53 @@ export default function PublicationList() {
   );
 
   return (
-    <Grid container spacing={2} alignItems="center" className={classes.root}>
-      <Grid item>センサー場所一覧{customList(left)}</Grid>
+    <Grid container spacing={2} alignItems="center">
+      <Grid item>非公開{customList(left)}</Grid>
       <Grid item>
         <Grid container direction="column">
           <Button
+            sx={{ my: 0.5 }}
             variant="outlined"
             size="small"
-            className={classes.button}
             onClick={handleAllRight}
             disabled={left.length === 0}
-            aria-label="すべて追加"
+            aria-label="move all right"
           >
-            すべて追加
+            すべて公開
           </Button>
           <Button
+            sx={{ my: 0.5 }}
             variant="outlined"
             size="small"
-            className={classes.button}
             onClick={handleCheckedRight}
             disabled={leftChecked.length === 0}
-            aria-label="選択した場所を追加"
+            aria-label="move selected right"
           >
-            選択した場所を追加
+            選択した場所を公開
           </Button>
           <Button
+            sx={{ my: 0.5 }}
             variant="outlined"
             size="small"
-            className={classes.button}
             onClick={handleCheckedLeft}
             disabled={rightChecked.length === 0}
-            aria-label="選択した場所を除外"
+            aria-label="move selected left"
           >
-            選択した場所を除外
+            選択した場所を非公開
           </Button>
           <Button
+            sx={{ my: 0.5 }}
             variant="outlined"
             size="small"
-            className={classes.button}
             onClick={handleAllLeft}
             disabled={right.length === 0}
-            aria-label="すべて除外"
+            aria-label="move all left"
           >
-            すべて除外
+            すべて非公開
           </Button>
         </Grid>
       </Grid>
-      <Grid item>公開設定場所一覧{customList(right)}</Grid>
+      <Grid item>公開{customList(right)}</Grid>
     </Grid>
   );
 }
