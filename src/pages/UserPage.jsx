@@ -1,5 +1,4 @@
-import { ControlPointRounded } from "@mui/icons-material";
-import { Box, Container, IconButton, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import React from "react";
 import GroupList from "../components/user/GroupList";
 import PublicationDays from "../components/user/PublicationDays";
@@ -26,14 +25,6 @@ export default function UserPage() {
           <PublicationList />
         </Box>
         <Box mt={3}>
-          <Box display={"flex"} alignItems={"center"}>
-            <Typography variant={"h6"}>
-              <Box fontWeight={700}>グループ設定</Box>
-            </Typography>
-            <IconButton edge="end" aria-label="グループを削除">
-              <ControlPointRounded />
-            </IconButton>
-          </Box>
           <GroupList />
         </Box>
       </Box>
