@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Checkbox,
   Grid,
@@ -7,6 +8,7 @@ import {
   ListItemIcon,
   ListItemText,
   Paper,
+  Typography,
 } from "@mui/material";
 import React from "react";
 
@@ -94,53 +96,58 @@ export default function PublicationList() {
   );
 
   return (
-    <Grid container spacing={2} alignItems="center">
-      <Grid item>非公開{customList(left)}</Grid>
-      <Grid item>
-        <Grid container direction="column">
-          <Button
-            sx={{ my: 0.5 }}
-            variant="outlined"
-            size="small"
-            onClick={handleAllRight}
-            disabled={left.length === 0}
-            aria-label="move all right"
-          >
-            すべて公開
-          </Button>
-          <Button
-            sx={{ my: 0.5 }}
-            variant="outlined"
-            size="small"
-            onClick={handleCheckedRight}
-            disabled={leftChecked.length === 0}
-            aria-label="move selected right"
-          >
-            選択した場所を公開
-          </Button>
-          <Button
-            sx={{ my: 0.5 }}
-            variant="outlined"
-            size="small"
-            onClick={handleCheckedLeft}
-            disabled={rightChecked.length === 0}
-            aria-label="move selected left"
-          >
-            選択した場所を非公開
-          </Button>
-          <Button
-            sx={{ my: 0.5 }}
-            variant="outlined"
-            size="small"
-            onClick={handleAllLeft}
-            disabled={right.length === 0}
-            aria-label="move all left"
-          >
-            すべて非公開
-          </Button>
+    <>
+      <Typography variant={"h6"}>
+        <Box fontWeight={700}>公開場所</Box>
+      </Typography>
+      <Grid container spacing={2} alignItems="center">
+        <Grid item>非公開{customList(left)}</Grid>
+        <Grid item>
+          <Grid container direction="column">
+            <Button
+              sx={{ my: 0.5 }}
+              variant="outlined"
+              size="small"
+              onClick={handleAllRight}
+              disabled={left.length === 0}
+              aria-label="move all right"
+            >
+              すべて公開
+            </Button>
+            <Button
+              sx={{ my: 0.5 }}
+              variant="outlined"
+              size="small"
+              onClick={handleCheckedRight}
+              disabled={leftChecked.length === 0}
+              aria-label="move selected right"
+            >
+              選択した場所を公開
+            </Button>
+            <Button
+              sx={{ my: 0.5 }}
+              variant="outlined"
+              size="small"
+              onClick={handleCheckedLeft}
+              disabled={rightChecked.length === 0}
+              aria-label="move selected left"
+            >
+              選択した場所を非公開
+            </Button>
+            <Button
+              sx={{ my: 0.5 }}
+              variant="outlined"
+              size="small"
+              onClick={handleAllLeft}
+              disabled={right.length === 0}
+              aria-label="move all left"
+            >
+              すべて非公開
+            </Button>
+          </Grid>
         </Grid>
+        <Grid item>公開{customList(right)}</Grid>
       </Grid>
-      <Grid item>公開{customList(right)}</Grid>
-    </Grid>
+    </>
   );
 }
