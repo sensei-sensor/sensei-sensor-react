@@ -1,4 +1,6 @@
-import { createTheme } from "@material-ui/core";
+import { Box, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import React from "react";
+import HeaderBer from "./HeaderBer";
 
 const theme = createTheme({
   palette: {
@@ -34,4 +36,14 @@ const theme = createTheme({
   },
 });
 
-export default theme;
+export default function GenericTemplate(props) {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box sx={{ backgroundColor: theme.palette.background.default }}>
+        <HeaderBer />
+        {props.children}
+      </Box>
+    </ThemeProvider>
+  );
+}
