@@ -1,12 +1,12 @@
-import { Grid } from "@mui/material";
 import React from "react";
+import GenericTemplate from "../components/common/GenericTemplate.jsx";
 import GroupContainer from "../components/main/GroupContainer";
 
 export default function MainPage() {
   return (
-    <Grid container spacing={4} justifyContent={"center"}>
+    <GenericTemplate>
       <GroupContainer />
       <GroupContainer />
-    </Grid>
+    </GenericTemplate>
   );
 }

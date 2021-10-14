@@ -1,36 +1,22 @@
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import React from "react";
 import { Link } from "react-router-dom";
-import MaterialTheme from "../../styles/Theme";
 
-const useStyles = makeStyles(() => ({
-  "@global": {
-    body: {
-      backgroundColor: MaterialTheme.palette.background.default,
-    },
-  },
-  root: {
-    flexGrow: 1,
-  },
-  title: {
-    flexGrow: 1,
-    fontWeight: 700,
-    textDecoration: "none",
-  },
-}));
+const title = {
+  flexGrow: 1,
+  fontWeight: 700,
+  textDecoration: "none",
+};
 
-export default function HeaderBar() {
-  const classes = useStyles();
-
+export default function HeaderBer() {
   return (
-    <div className={classes.root}>
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" color={"default"}>
         <Toolbar>
           <Typography
             variant="h5"
             color={"primary"}
-            className={classes.title}
+            sx={title}
             component={Link}
             to={"/"}
           >
@@ -41,6 +27,6 @@ export default function HeaderBar() {
           </Button>
         </Toolbar>
       </AppBar>
-    </div>
+    </Box>
   );
 }
