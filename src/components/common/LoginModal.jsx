@@ -1,11 +1,15 @@
-import { Checkbox, FormControlLabel, TextField } from "@mui/material";
-import Backdrop from "@mui/material/Backdrop";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Fade from "@mui/material/Fade";
-import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
-import * as React from "react";
+import {
+  Backdrop,
+  Box,
+  Button,
+  Checkbox,
+  Fade,
+  FormControlLabel,
+  Modal,
+  TextField,
+  Typography,
+} from "@mui/material";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const style = {
