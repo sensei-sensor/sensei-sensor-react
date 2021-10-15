@@ -1,4 +1,11 @@
-import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Button,
+  styled,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import LoginModal from "./LoginModal";
@@ -14,9 +21,11 @@ export default function HeaderBer() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color={"default"}>
+      <AppBar color={"default"}>
         <Toolbar>
           <Typography
             variant="h5"
@@ -33,6 +42,7 @@ export default function HeaderBer() {
           <LoginModal open={open} handleClose={handleClose} />
         </Toolbar>
       </AppBar>
+      <Offset />
     </Box>
   );
 }

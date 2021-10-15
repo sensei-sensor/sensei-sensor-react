@@ -1,4 +1,4 @@
-import { Box, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import React from "react";
 import HeaderBer from "./HeaderBer";
 
@@ -34,16 +34,23 @@ const theme = createTheme({
   typography: {
     fontFamily: ["Roboto", "Noto Sans JP", "sans-serif"].join(","),
   },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          overflowY: "scroll",
+        },
+      },
+    },
+  },
 });
 
 export default function GenericTemplate(props) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ backgroundColor: theme.palette.background.default }}>
-        <HeaderBer />
-        {props.children}
-      </Box>
+      <HeaderBer />
+      {props.children}
     </ThemeProvider>
   );
 }
