@@ -1,6 +1,6 @@
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import React from "react";
-import HeaderBer from "./HeaderBer";
+import HeaderBer from "./components/common/HeaderBer";
 
 const theme = createTheme({
   palette: {

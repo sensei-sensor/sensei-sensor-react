@@ -11,8 +11,10 @@
     "lint:style": "stylelint '**/*.{css,scss,sass}'",
     "lint:style:fix": "stylelint --fix '**/*.{css,scss,sass}'",
     "fix": "npm run format && npm run lint:fix && npm run lint:style:fix",
-    "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "prepare": "node --eval 'process.exit(process.env.NODE_ENV === `production` ? 0 : 1)' || husky install",
+    "lint-staged": "lint-staged",
+    "gcp-build": "vite build",
+    "deploy": "gcloud app deploy"
   },
   "lint-staged": {
     "*.{js,jsx,json,html,md,json}": [

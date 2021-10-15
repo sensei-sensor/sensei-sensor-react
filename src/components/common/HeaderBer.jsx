@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-import LoginModal from "./LoginModal";
+import LoginModal from "../main/LoginModal";
 
 const title = {
   flexGrow: 1,

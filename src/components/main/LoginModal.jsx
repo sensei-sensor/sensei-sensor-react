@@ -58,7 +58,7 @@ export default function LoginModal(props) {
               }}
             >
               <Typography component="h1" variant="h5">
-                Sensei Sensor ログイン
+                College Sensor ログイン
               </Typography>
               <Box
                 component="form"

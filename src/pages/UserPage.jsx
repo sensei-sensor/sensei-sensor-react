@@ -1,6 +1,6 @@
 import { Box, Container, Typography } from "@mui/material";
 import React from "react";
-import GenericTemplate from "../components/common/GenericTemplate";
+import GenericTemplate from "../GenericTemplate";
 import GroupList from "../components/user/GroupList";
 import PublicationDays from "../components/user/PublicationDays";
 import PublicationList from "../components/user/PublicationList";
