@@ -1,7 +1,6 @@
 import { ControlPoint, Delete, Edit } from "@mui/icons-material";
 import {
   Box,
-  Button,
   IconButton,
   List,
   ListItem,
@@ -30,9 +29,13 @@ export default function GroupList() {
         <ListItem
           secondaryAction={
             <>
-              <Button startIcon={<Edit />} onClick={handleOpen}>
-                グループを編集
-              </Button>
+              <IconButton
+                edge="end"
+                aria-label="グループを編集"
+                onClick={handleOpen}
+              >
+                <Edit />
+              </IconButton>
               <IconButton edge="end" aria-label="グループを削除">
                 <Delete />
               </IconButton>
