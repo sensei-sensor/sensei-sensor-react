@@ -1,11 +1,4 @@
-import {
-  Backdrop,
-  Box,
-  Fade,
-  Modal,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Backdrop, Box, Fade, Modal, Typography } from "@mui/material";
 import React from "react";
 
 const style = {
@@ -30,31 +23,12 @@ export default function GroupEditModal(props) {
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
-          timeout: 100,
+          timeout: 500,
         }}
       >
         <Fade in={props.open}>
           <Box sx={style}>
-            <Box
-              sx={{
-                marginTop: 3,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <Typography component="h1" variant="h5">
-                5I グループの編集
-              </Typography>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="groupName"
-                label="グループ名"
-                name="groupName"
-              />
-            </Box>
+            <Typography>aaa</Typography>
           </Box>
         </Fade>
       </Modal>
