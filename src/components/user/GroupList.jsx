@@ -9,7 +9,6 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import EditGroupModal from "../../modals/EditGroupModal";
 
 export default function GroupList() {
   const [open, setOpen] = React.useState(false);
