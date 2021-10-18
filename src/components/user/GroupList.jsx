@@ -30,9 +30,6 @@ export default function GroupList() {
         <ListItem
           secondaryAction={
             <>
-              <Button startIcon={<Edit />} onClick={handleOpen}>
-                グループを編集
-              </Button>
               <IconButton
                 edge="end"
                 aria-label="グループを編集"
@@ -43,7 +40,7 @@ export default function GroupList() {
               <IconButton edge="end" aria-label="グループを削除">
                 <Delete />
               </IconButton>
-              <EditGroupModal open={open} handleClose={handleClose} />
+              <GroupEditModal open={open} handleClose={handleClose} />
             </>
           }
         >
