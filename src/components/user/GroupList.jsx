@@ -1,7 +1,6 @@
 import { ControlPoint, Delete, Edit } from "@mui/icons-material";
 import {
   Box,
-  Button,
   IconButton,
   List,
   ListItem,
@@ -9,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import EditGroupModal from "../../modals/EditGroupModal";
+import GroupEditModal from "./GroupEditModal";
 
 export default function GroupList() {
   const [open, setOpen] = React.useState(false);
@@ -30,9 +29,6 @@ export default function GroupList() {
         <ListItem
           secondaryAction={
             <>
-              <Button startIcon={<Edit />} onClick={handleOpen}>
-                グループを編集
-              </Button>
               <IconButton
                 edge="end"
                 aria-label="グループを編集"
@@ -43,7 +39,7 @@ export default function GroupList() {
               <IconButton edge="end" aria-label="グループを削除">
                 <Delete />
               </IconButton>
-              <EditGroupModal open={open} handleClose={handleClose} />
+              <GroupEditModal open={open} handleClose={handleClose} />
             </>
           }
         >
