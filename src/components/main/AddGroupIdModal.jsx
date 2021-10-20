@@ -22,7 +22,6 @@ const style = {
 
 export default function AddGroupIdModal(props) {
   useEffect(() => {
-    console.log(localStorage.getItem("groupId"));
     localStorage.getItem("groupId")
       ? JSON.parse(localStorage.getItem("groupId"))
       : localStorage.setItem("groupId", JSON.stringify([]));
@@ -30,14 +29,11 @@ export default function AddGroupIdModal(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
     const groupIdList = JSON.parse(localStorage.getItem("groupId"));
-    console.log(groupIdList);
+    groupIdList.push(String(data.get("groupId")));
 
-    // eslint-disable-next-line no-console
-    console.log(data.get("groupId"));
-
-    groupIdList.push = String(data.get("groupId"));
     localStorage.setItem("groupId", JSON.stringify(groupIdList));
   };
 
@@ -74,6 +70,7 @@ export default function AddGroupIdModal(props) {
               >
                 <TextField
                   margin="normal"
+                  required
                   fullWidth
                   id="groupId"
                   label="グループID"
