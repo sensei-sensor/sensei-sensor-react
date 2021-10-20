@@ -30,13 +30,9 @@ export default function GroupList() {
         <ListItem
           secondaryAction={
             <>
-              <IconButton
-                edge="end"
-                aria-label="グループを編集"
-                onClick={handleOpen}
-              >
-                <Edit />
-              </IconButton>
+              <Button startIcon={<Edit />} onClick={handleOpen}>
+                グループを編集
+              </Button>
               <IconButton edge="end" aria-label="グループを削除">
                 <Delete />
               </IconButton>
