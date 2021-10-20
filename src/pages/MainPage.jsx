@@ -8,7 +8,14 @@ export default function MainPage() {
   const [groupOpen, setGroupOpen] = React.useState(false);
   const handleGroupOpen = () => setGroupOpen(true);
   const handleGroupClose = () => setGroupOpen(false);
-  const groupList = JSON.parse(localStorage.getItem("groupId"));
+
+  const groupList = localStorage.getItem("groupId")
+    ? JSON.parse(localStorage.getItem("groupId"))
+    : localStorage.setItem("groupId", JSON.stringify([]));
+
+  if (!groupList) {
+    return;
+  }
 
   if (groupList.length === 0) {
     return (
@@ -21,8 +28,12 @@ export default function MainPage() {
             textAlign={"center"}
             bgcolor={"white"}
           >
-            <Button color="primary" onClick={handleGroupOpen}>
-              <Box fontWeight={700}>グループIDの追加</Box>
+            <Button
+              variant="contained"
+              size={"large"}
+              onClick={handleGroupOpen}
+            >
+              グループIDの追加
             </Button>
           </Box>
         </Container>
