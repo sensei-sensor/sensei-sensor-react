@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 const style = {
   position: "absolute",
@@ -26,12 +26,6 @@ export default function AddGroupIdModal(props) {
   const [helperText, setHelperText] = useState(
     "グループIDは半角英数で入力してください"
   );
-
-  useEffect(() => {
-    localStorage.getItem("groupId")
-      ? JSON.parse(localStorage.getItem("groupId"))
-      : localStorage.setItem("groupId", JSON.stringify([]));
-  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
