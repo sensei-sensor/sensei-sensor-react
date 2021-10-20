@@ -23,7 +23,9 @@ const style = {
 export default function AddGroupIdModal(props) {
   const inputRef = useRef(null);
   const [inputError, setInputError] = useState(false);
-  const [helperText, setHelperText] = useState("グループIDは必須です。");
+  const [helperText, setHelperText] = useState(
+    "グループIDは半角英数で入力してください。"
+  );
 
   useEffect(() => {
     localStorage.getItem("groupId")
@@ -93,12 +95,14 @@ export default function AddGroupIdModal(props) {
                   margin="normal"
                   required
                   fullWidth
-                  inputProps={{ pattern: "^[a-zA-Z0-9_]+$" }}
+                  inputProps={{ maxLength: 8, pattern: "^[a-zA-Z0-9_]+$" }}
                   inputRef={inputRef}
                   id="groupId"
                   label="グループID"
                   name="groupId"
                   helperText={helperText}
+                  autoComplete={"off"}
+                  autoFocus
                 />
                 <Button
                   type="submit"
