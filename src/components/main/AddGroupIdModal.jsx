@@ -24,7 +24,7 @@ export default function AddGroupIdModal(props) {
   const inputRef = useRef(null);
   const [inputError, setInputError] = useState(false);
   const [helperText, setHelperText] = useState(
-    "グループIDは半角英数で入力してください。"
+    "グループIDは半角英数で入力してください"
   );
 
   useEffect(() => {
@@ -36,11 +36,12 @@ export default function AddGroupIdModal(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const groupId = String(data.get("groupId"));
     const groupIdList = JSON.parse(localStorage.getItem("groupId"));
 
     for (let i = 0; i < groupIdList.length; i++) {
-      if (groupIdList[i] === String(data.get("groupId"))) {
-        setHelperText("そのグループIDは登録されています。");
+      if (groupIdList[i] === groupId) {
+        setHelperText("そのグループIDは登録されています");
         setInputError(true);
         return;
       }
@@ -49,11 +50,12 @@ export default function AddGroupIdModal(props) {
     if (inputRef.current) {
       const ref = inputRef.current;
       if (!ref.validity.valid) {
-        setHelperText("グループIDは必須です。");
+        setHelperText("グループIDは半角英数かつ必須です");
         setInputError(true);
       } else {
-        groupIdList.push(String(data.get("groupId")));
+        groupIdList.push(groupId);
         localStorage.setItem("groupId", JSON.stringify(groupIdList));
+        setHelperText("");
         setInputError(false);
       }
     }
@@ -88,7 +90,7 @@ export default function AddGroupIdModal(props) {
                 component="form"
                 onSubmit={handleSubmit}
                 noValidate
-                sx={{ mt: 1 }}
+                sx={{ mt: 1, width: 400 }}
               >
                 <TextField
                   error={inputError}
