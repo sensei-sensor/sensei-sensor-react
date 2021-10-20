@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const style = {
   position: "absolute",
@@ -21,6 +21,10 @@ const style = {
 };
 
 export default function AddGroupIdModal(props) {
+  const inputRef = useRef(null);
+  const [inputError, setInputError] = useState(false);
+  const [helperText, setHelperText] = useState("グループIDは必須です。");
+
   useEffect(() => {
     localStorage.getItem("groupId")
       ? JSON.parse(localStorage.getItem("groupId"))
@@ -29,12 +33,28 @@ export default function AddGroupIdModal(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const data = new FormData(event.currentTarget);
     const groupIdList = JSON.parse(localStorage.getItem("groupId"));
-    groupIdList.push(String(data.get("groupId")));
 
-    localStorage.setItem("groupId", JSON.stringify(groupIdList));
+    for (let i = 0; i < groupIdList.length; i++) {
+      if (groupIdList[i] === String(data.get("groupId"))) {
+        setHelperText("そのグループIDは登録されています。");
+        setInputError(true);
+        return;
+      }
+    }
+
+    if (inputRef.current) {
+      const ref = inputRef.current;
+      if (!ref.validity.valid) {
+        setHelperText("グループIDは必須です。");
+        setInputError(true);
+      } else {
+        groupIdList.push(String(data.get("groupId")));
+        localStorage.setItem("groupId", JSON.stringify(groupIdList));
+        setInputError(false);
+      }
+    }
   };
 
   return (
@@ -69,12 +89,16 @@ export default function AddGroupIdModal(props) {
                 sx={{ mt: 1 }}
               >
                 <TextField
+                  error={inputError}
                   margin="normal"
                   required
                   fullWidth
+                  inputProps={{ pattern: "^[a-zA-Z0-9_]+$" }}
+                  inputRef={inputRef}
                   id="groupId"
                   label="グループID"
                   name="groupId"
+                  helperText={helperText}
                 />
                 <Button
                   type="submit"
