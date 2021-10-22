@@ -43,8 +43,9 @@ export default function MainPage() {
   } else {
     return (
       <GenericTemplate>
-        <GroupContainer />
-        <GroupContainer />
+        {groupList.map((data) => {
+          return <GroupContainer key={data} />;
+        })}
       </GenericTemplate>
     );
   }
