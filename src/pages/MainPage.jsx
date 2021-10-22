@@ -1,23 +1,28 @@
 import { Box, Button, Container } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import GenericTemplate from "../GenericTemplate.jsx";
 import AddGroupIdModal from "../components/main/AddGroupIdModal";
 import GroupContainer from "../components/main/GroupContainer";
 
 export default function MainPage() {
   const [groupOpen, setGroupOpen] = React.useState(false);
+  const [groupIdList, setGroupIdList] = useState(
+    localStorage.getItem("groupId")
+      ? JSON.parse(localStorage.getItem("groupId"))
+      : localStorage.setItem("groupId", JSON.stringify([]))
+  );
   const handleGroupOpen = () => setGroupOpen(true);
   const handleGroupClose = () => setGroupOpen(false);
 
-  const groupList = localStorage.getItem("groupId")
-    ? JSON.parse(localStorage.getItem("groupId"))
-    : localStorage.setItem("groupId", JSON.stringify([]));
+  useEffect(() => {
+    localStorage.setItem("groupId", JSON.stringify(groupIdList));
+  }, [groupIdList]);
 
-  if (!groupList) {
+  if (!groupIdList) {
     return;
   }
 
-  if (groupList.length === 0) {
+  if (groupIdList.length === 0) {
     return (
       <GenericTemplate>
         <Container>
@@ -37,13 +42,18 @@ export default function MainPage() {
             </Button>
           </Box>
         </Container>
-        <AddGroupIdModal open={groupOpen} handleClose={handleGroupClose} />
+        <AddGroupIdModal
+          open={groupOpen}
+          handleClose={handleGroupClose}
+          groupIdList={groupIdList}
+          setGroupIdList={setGroupIdList}
+        />
       </GenericTemplate>
     );
   } else {
     return (
       <GenericTemplate>
-        {groupList.map((data) => {
+        {groupIdList.map((data) => {
           return <GroupContainer key={data} />;
         })}
       </GenericTemplate>

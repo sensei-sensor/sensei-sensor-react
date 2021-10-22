@@ -31,10 +31,10 @@ export default function AddGroupIdModal(props) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const groupId = String(data.get("groupId"));
-    const groupIdList = JSON.parse(localStorage.getItem("groupId"));
+    console.log(groupId);
 
-    for (let i = 0; i < groupIdList.length; i++) {
-      if (groupIdList[i] === groupId) {
+    for (let i = 0; i < props.groupIdList.length; i++) {
+      if (props.groupIdList[i] === groupId) {
         setHelperText("そのグループIDは登録されています");
         setInputError(true);
         return;
@@ -47,8 +47,7 @@ export default function AddGroupIdModal(props) {
         setHelperText("グループIDは半角英数かつ必須です");
         setInputError(true);
       } else {
-        groupIdList.push(groupId);
-        localStorage.setItem("groupId", JSON.stringify(groupIdList));
+        props.setGroupIdList((groupIdList) => [...groupIdList, groupId]);
         setHelperText("");
         setInputError(false);
       }
