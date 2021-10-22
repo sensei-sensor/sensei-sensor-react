@@ -60,7 +60,10 @@ export default function MainPage() {
     );
   } else {
     return (
-      <GenericTemplate>
+      <GenericTemplate
+        groupIdList={groupIdList}
+        setGroupIdList={setGroupIdList}
+      >
         {groupIdList.map((data) => {
           return <GroupContainer key={data} />;
         })}

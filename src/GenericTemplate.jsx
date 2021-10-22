@@ -49,7 +49,10 @@ export default function GenericTemplate(props) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <HeaderBer />
+      <HeaderBer
+        groupIdList={props.groupIdList}
+        setGroupIdList={props.setGroupIdList}
+      />
       {props.children}
     </ThemeProvider>
   );
