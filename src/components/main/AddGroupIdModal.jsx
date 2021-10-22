@@ -31,7 +31,6 @@ export default function AddGroupIdModal(props) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const groupId = String(data.get("groupId"));
-    console.log(groupId);
 
     for (let i = 0; i < props.groupIdList.length; i++) {
       if (props.groupIdList[i] === groupId) {
@@ -54,64 +53,67 @@ export default function AddGroupIdModal(props) {
     }
   };
 
-  return (
-    <div>
-      <Modal
-        aria-labelledby="add-group-id-modal"
-        aria-describedby="add-a-group-id"
-        open={props.open}
-        onClose={props.handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 100,
-        }}
-      >
-        <Fade in={props.open}>
-          <Box sx={style}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <Typography component="h1" variant="h5">
-                グループの追加
-              </Typography>
+  if (!props.groupIdList) return null;
+  else {
+    return (
+      <div>
+        <Modal
+          aria-labelledby="add-group-id-modal"
+          aria-describedby="add-a-group-id"
+          open={props.open}
+          onClose={props.handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 100,
+          }}
+        >
+          <Fade in={props.open}>
+            <Box sx={style}>
               <Box
-                component="form"
-                onSubmit={handleSubmit}
-                noValidate
-                sx={{ mt: 1, width: 400 }}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
               >
-                <TextField
-                  error={inputError}
-                  margin="normal"
-                  required
-                  fullWidth
-                  inputProps={{ maxLength: 8, pattern: "^[a-zA-Z0-9_]+$" }}
-                  inputRef={inputRef}
-                  id="groupId"
-                  label="グループID"
-                  name="groupId"
-                  helperText={helperText}
-                  autoComplete={"off"}
-                  autoFocus
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
+                <Typography component="h1" variant="h5">
+                  グループの追加
+                </Typography>
+                <Box
+                  component="form"
+                  onSubmit={handleSubmit}
+                  noValidate
+                  sx={{ mt: 1, width: 400 }}
                 >
-                  グループを追加
-                </Button>
+                  <TextField
+                    error={inputError}
+                    margin="normal"
+                    required
+                    fullWidth
+                    inputProps={{ maxLength: 8, pattern: "^[a-zA-Z0-9_]+$" }}
+                    inputRef={inputRef}
+                    id="groupId"
+                    label="グループID"
+                    name="groupId"
+                    helperText={helperText}
+                    autoComplete={"off"}
+                    autoFocus
+                  />
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    グループを追加
+                  </Button>
+                </Box>
               </Box>
             </Box>
-          </Box>
-        </Fade>
-      </Modal>
-    </div>
-  );
+          </Fade>
+        </Modal>
+      </div>
+    );
+  }
 }
