@@ -17,10 +17,11 @@ const title = {
   textDecoration: "none",
 };
 
-export default function HeaderBer() {
+export default function HeaderBer(props) {
   const [loginOpen, setLoginOpen] = React.useState(false);
   const handleLoginOpen = () => setLoginOpen(true);
   const handleLoginClose = () => setLoginOpen(false);
+
   const [groupOpen, setGroupOpen] = React.useState(false);
   const handleGroupOpen = () => setGroupOpen(true);
   const handleGroupClose = () => setGroupOpen(false);
@@ -47,7 +48,12 @@ export default function HeaderBer() {
             <Box fontWeight={700}>先生向けログイン</Box>
           </Button>
           <LoginModal open={loginOpen} handleClose={handleLoginClose} />
-          <AddGroupIdModal open={groupOpen} handleClose={handleGroupClose} />
+          <AddGroupIdModal
+            open={groupOpen}
+            handleClose={handleGroupClose}
+            groupIdList={props.groupIdList}
+            setGroupIdList={props.setGroupIdList}
+          />
         </Toolbar>
       </AppBar>
       <Offset />

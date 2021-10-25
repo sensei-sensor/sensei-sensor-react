@@ -1,5 +1,5 @@
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import HeaderBer from "./components/common/HeaderBer";
 
 const theme = createTheme({
@@ -46,16 +46,13 @@ const theme = createTheme({
 });
 
 export default function GenericTemplate(props) {
-  useEffect(() => {
-    localStorage.getItem("groupId")
-      ? JSON.parse(localStorage.getItem("groupId"))
-      : localStorage.setItem("groupId", JSON.stringify([]));
-  }, []);
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <HeaderBer />
+      <HeaderBer
+        groupIdList={props.groupIdList}
+        setGroupIdList={props.setGroupIdList}
+      />
       {props.children}
     </ThemeProvider>
   );
