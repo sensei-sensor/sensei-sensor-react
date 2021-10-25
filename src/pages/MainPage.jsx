@@ -5,17 +5,21 @@ import AddGroupIdModal from "../components/main/AddGroupIdModal";
 import GroupContainer from "../components/main/GroupContainer";
 
 export default function MainPage() {
+  function setLocalStorage() {
+    localStorage.setItem("groupId", JSON.stringify([]));
+    return JSON.parse(localStorage.getItem("groupId"));
+  }
+
   const [groupOpen, setGroupOpen] = React.useState(false);
-  const [groupIdList, setGroupIdList] = useState(null);
+  const [groupIdList, setGroupIdList] = useState(
+    localStorage.getItem("groupId")
+      ? JSON.parse(localStorage.getItem("groupId"))
+      : setLocalStorage()
+  );
   const handleGroupOpen = () => setGroupOpen(true);
   const handleGroupClose = () => setGroupOpen(false);
 
-  if (!localStorage.getItem("groupId")) {
-    localStorage.setItem("groupId", JSON.stringify([]));
-    MainPage();
-  } else if (groupIdList === null) {
-    setGroupIdList(JSON.parse(localStorage.getItem("groupId")));
-  } else if (groupIdList.length === 0) {
+  if (groupIdList.length === 0) {
     return (
       <GenericTemplate>
         <Container>
@@ -44,6 +48,7 @@ export default function MainPage() {
       </GenericTemplate>
     );
   } else {
+    console.log("out");
     return (
       <GenericTemplate
         groupIdList={groupIdList}
