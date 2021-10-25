@@ -47,6 +47,7 @@ export default function AddGroupIdModal(props) {
         setInputError(true);
       } else {
         props.setGroupIdList((groupIdList) => [...groupIdList, groupId]);
+        props.handleClose();
         setHelperText("");
         setInputError(false);
       }

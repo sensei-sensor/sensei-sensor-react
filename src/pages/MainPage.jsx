@@ -1,5 +1,5 @@
 import { Box, Button, Container } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GenericTemplate from "../GenericTemplate.jsx";
 import AddGroupIdModal from "../components/main/AddGroupIdModal";
 import GroupContainer from "../components/main/GroupContainer";
@@ -18,6 +18,10 @@ export default function MainPage() {
   );
   const handleGroupOpen = () => setGroupOpen(true);
   const handleGroupClose = () => setGroupOpen(false);
+
+  useEffect(() => {
+    localStorage.setItem("groupId", JSON.stringify(groupIdList));
+  }, [groupIdList]);
 
   if (groupIdList.length === 0) {
     return (
@@ -48,7 +52,6 @@ export default function MainPage() {
       </GenericTemplate>
     );
   } else {
-    console.log("out");
     return (
       <GenericTemplate
         groupIdList={groupIdList}
