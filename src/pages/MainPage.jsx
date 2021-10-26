@@ -1,8 +1,8 @@
 import { Box, Button, Container } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import GenericTemplate from "../GenericTemplate.jsx";
-import AddGroupIdModal from "../components/main/AddGroupIdModal";
 import GroupContainer from "../components/main/GroupContainer";
+import AddGroupIdModal from "../modals/AddGroupIdModal";
 
 export default function MainPage() {
   function setLocalStorage() {

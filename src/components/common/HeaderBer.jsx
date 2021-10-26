@@ -8,8 +8,8 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import AddGroupIdModal from "../main/AddGroupIdModal";
-import LoginModal from "../main/LoginModal";
+import AddGroupIdModal from "../../modals/AddGroupIdModal";
+import LoginModal from "../../modals/LoginModal";
 
 export default function HeaderBer(props) {
   const [loginOpen, setLoginOpen] = useState(false);
