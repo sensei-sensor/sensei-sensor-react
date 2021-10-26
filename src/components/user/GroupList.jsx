@@ -8,11 +8,11 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import EditGroupModal from "../../modals/EditGroupModal";
 
 export default function GroupList() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -33,13 +33,6 @@ export default function GroupList() {
               <Button startIcon={<Edit />} onClick={handleOpen}>
                 グループを編集
               </Button>
-              <IconButton
-                edge="end"
-                aria-label="グループを編集"
-                onClick={handleOpen}
-              >
-                <Edit />
-              </IconButton>
               <IconButton edge="end" aria-label="グループを削除">
                 <Delete />
               </IconButton>
