@@ -18,6 +18,7 @@ export default function MainPage() {
   );
   const handleGroupOpen = () => setGroupOpen(true);
   const handleGroupClose = () => setGroupOpen(false);
+  const groupButtonVisible = groupIdList.length !== 0;
 
   useEffect(() => {
     localStorage.setItem("groupId", JSON.stringify(groupIdList));
@@ -56,6 +57,7 @@ export default function MainPage() {
       <GenericTemplate
         groupIdList={groupIdList}
         setGroupIdList={setGroupIdList}
+        groupButtonVisible={groupButtonVisible}
       >
         {groupIdList.map((data) => {
           return <GroupContainer key={data} />;

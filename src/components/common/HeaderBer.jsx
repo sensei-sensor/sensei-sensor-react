@@ -42,19 +42,23 @@ export default function HeaderBer(props) {
               College Sensor
             </Box>
           </Typography>
-          <Button color="primary" onClick={handleGroupOpen}>
-            <Box fontWeight={700}>グループIDの追加</Box>
-          </Button>
+          {props.groupButtonVisible && (
+            <>
+              <Button color="primary" onClick={handleGroupOpen}>
+                <Box fontWeight={700}>グループIDの追加</Box>
+              </Button>
+              <AddGroupIdModal
+                open={groupOpen}
+                handleClose={handleGroupClose}
+                groupIdList={props.groupIdList}
+                setGroupIdList={props.setGroupIdList}
+              />
+            </>
+          )}
           <Button color="primary" onClick={handleLoginOpen}>
             <Box fontWeight={700}>先生向けログイン</Box>
           </Button>
           <LoginModal open={loginOpen} handleClose={handleLoginClose} />
-          <AddGroupIdModal
-            open={groupOpen}
-            handleClose={handleGroupClose}
-            groupIdList={props.groupIdList}
-            setGroupIdList={props.setGroupIdList}
-          />
         </Toolbar>
       </AppBar>
       <Offset />
