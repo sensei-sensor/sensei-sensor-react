@@ -19,7 +19,7 @@ const style = {
   p: 4,
 };
 
-export default function GroupEditModal(props) {
+export default function EditGroupModal(props) {
   return (
     <div>
       <Modal
