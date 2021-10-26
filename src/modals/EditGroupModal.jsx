@@ -17,8 +17,6 @@ const style = {
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
-  display: "flex",
-  flexDirection: "column",
 };
 
 export default function EditGroupModal(props) {
@@ -37,23 +35,25 @@ export default function EditGroupModal(props) {
       >
         <Fade in={props.open}>
           <Box sx={style}>
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Box
+              sx={{
+                marginTop: 3,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
               <Typography component="h1" variant="h5">
                 5I グループの編集
               </Typography>
-            </Box>
-            <Box mt={1}>
-              <Typography variant="h6">グループ名</Typography>
               <TextField
+                margin="normal"
                 required
                 fullWidth
                 id="groupName"
                 label="グループ名"
                 name="groupName"
               />
-            </Box>
-            <Box mt={2}>
-              <Typography variant="h6">現在グループに追加済み</Typography>
             </Box>
           </Box>
         </Fade>
