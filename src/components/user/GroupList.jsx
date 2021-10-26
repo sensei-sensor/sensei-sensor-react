@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import GroupEditModal from "./GroupEditModal";
+import EditGroupModal from "../../modals/EditGroupModal";
 
 export default function GroupList() {
   const [open, setOpen] = React.useState(false);
@@ -33,10 +33,17 @@ export default function GroupList() {
               <Button startIcon={<Edit />} onClick={handleOpen}>
                 グループを編集
               </Button>
+              <IconButton
+                edge="end"
+                aria-label="グループを編集"
+                onClick={handleOpen}
+              >
+                <Edit />
+              </IconButton>
               <IconButton edge="end" aria-label="グループを削除">
                 <Delete />
               </IconButton>
-              <GroupEditModal open={open} handleClose={handleClose} />
+              <EditGroupModal open={open} handleClose={handleClose} />
             </>
           }
         >
