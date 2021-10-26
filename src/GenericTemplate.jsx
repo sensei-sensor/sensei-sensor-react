@@ -52,6 +52,7 @@ export default function GenericTemplate(props) {
       <HeaderBer
         groupIdList={props.groupIdList}
         setGroupIdList={props.setGroupIdList}
+        groupButtonVisible={props.groupButtonVisible}
       />
       {props.children}
     </ThemeProvider>
