@@ -38,7 +38,7 @@ const theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          overflowY: "scroll",
+          overflow: "auto",
         },
       },
     },
