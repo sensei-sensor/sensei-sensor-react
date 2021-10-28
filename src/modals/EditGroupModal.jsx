@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import GroupSubheaderList from "../components/user/GroupSubheaderList";
 
 const style = {
   position: "absolute",
@@ -54,6 +55,7 @@ export default function EditGroupModal(props) {
             </Box>
             <Box mt={2}>
               <Typography variant="h6">現在グループに追加済み</Typography>
+              <GroupSubheaderList />
             </Box>
           </Box>
         </Fade>
