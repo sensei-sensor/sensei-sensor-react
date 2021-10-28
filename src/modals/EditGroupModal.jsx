@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import GroupNestedList from "../components/user/GroupNestedList";
 import GroupSubheaderList from "../components/user/GroupSubheaderList";
 
 const style = {
@@ -15,6 +16,8 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 500,
+  height: 600,
+  overflow: "auto",
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
@@ -56,6 +59,7 @@ export default function EditGroupModal(props) {
             <Box mt={2}>
               <Typography variant="h6">現在グループに追加済み</Typography>
               <GroupSubheaderList />
+              <GroupNestedList />
             </Box>
           </Box>
         </Fade>
