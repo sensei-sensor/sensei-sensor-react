@@ -1,5 +1,5 @@
 import { List, ListItem, ListItemText, ListSubheader } from "@mui/material";
-import * as React from "react";
+import React from "react";
 
 export default function GroupSubheaderList() {
   return (
