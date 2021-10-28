@@ -1,8 +1,16 @@
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import {
+  Drafts,
+  ExpandLess,
+  ExpandMore,
+  MoveToInbox,
+  Send,
+  StarBorder,
+} from "@mui/icons-material";
 import {
   Collapse,
   List,
   ListItemButton,
+  ListItemIcon,
   ListItemText,
   ListSubheader,
 } from "@mui/material";
@@ -17,13 +25,7 @@ export default function GroupNestedList() {
 
   return (
     <List
-      sx={{
-        width: "100%",
-        bgcolor: "background.paper",
-        border: "1px solid #C1C1C1",
-        borderRadius: "4px",
-        marginTop: 2,
-      }}
+      sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
       component="nav"
       aria-labelledby="nested-list-subheader"
       subheader={
@@ -32,36 +34,32 @@ export default function GroupNestedList() {
         </ListSubheader>
       }
     >
+      <ListItemButton>
+        <ListItemIcon>
+          <Send />
+        </ListItemIcon>
+        <ListItemText primary="Sent mail" />
+      </ListItemButton>
+      <ListItemButton>
+        <ListItemIcon>
+          <Drafts />
+        </ListItemIcon>
+        <ListItemText primary="Drafts" />
+      </ListItemButton>
       <ListItemButton onClick={handleClick}>
-        <ListItemText primary="機械コース" />
+        <ListItemIcon>
+          <MoveToInbox />
+        </ListItemIcon>
+        <ListItemText primary="Inbox" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <ListItemButton sx={{ pl: 4 }}>
-            <ListItemText primary="〇〇先生" />
-          </ListItemButton>
-        </List>
-      </Collapse>
-      <ListItemButton onClick={handleClick}>
-        <ListItemText primary="機械コース" />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }}>
-            <ListItemText primary="〇〇先生" />
-          </ListItemButton>
-        </List>
-      </Collapse>
-      <ListItemButton onClick={handleClick}>
-        <ListItemText primary="機械コース" />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }}>
-            <ListItemText primary="〇〇先生" />
+            <ListItemIcon>
+              <StarBorder />
+            </ListItemIcon>
+            <ListItemText primary="Starred" />
           </ListItemButton>
         </List>
       </Collapse>
