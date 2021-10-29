@@ -10,8 +10,7 @@ export default function GroupSubheaderList() {
         overflow: "auto",
         maxHeight: 300,
         background: "background.paper",
-        border: "1px solid",
-        borderColor: "#C1C1C1",
+        border: "1px solid #C1C1C1",
         borderRadius: "4px",
         "& ul": { padding: 0 },
       }}
