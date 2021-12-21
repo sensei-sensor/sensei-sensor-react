@@ -12,7 +12,7 @@
     "lint:style:fix": "stylelint --fix '**/*.{css,scss,sass}'",
     "fix": "npm run format && npm run lint:fix && npm run lint:style:fix",
     "prepare": "node --eval 'process.exit(process.env.NODE_ENV === `production` ? 0 : 1)' || husky install",
-    "lint-staged": "lint-staged",
+    "lint-staged": "lint-staged --allow-empty",
     "gcp-build": "vite build",
     "deploy": "gcloud app deploy"
   },
