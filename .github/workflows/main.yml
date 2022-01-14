@@ -29,10 +29,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "14"
-          cache: 'npm'
+          cache: "npm"
       - run: npm install
       - run: npm run build
-
 #       - name: copy file via ssh password 1
 #         uses: appleboy/scp-action@master
 #         with:
