@@ -8,10 +8,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path={"/"} component={MainPage}>
-          <Route path={"/UserPage"} component={UserPage} />
-          <Route path={"/DisasterPage"} component={DisasterPage} />
-        </Route>
+        <Route exact path={"/"} element={<MainPage />} />
+        <Route path={"/UserPage"} element={<UserPage />} />
+        <Route path={"/DisasterPage"} element={<DisasterPage />} />
       </Routes>
     </BrowserRouter>
   );

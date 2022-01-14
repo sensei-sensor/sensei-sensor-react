@@ -9,8 +9,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import axios from "axios";
 import React from "react";
-import { Link } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -32,6 +32,16 @@ export default function LoginModal(props) {
       email: data.get("email"),
       password: data.get("password"),
     });
+
+    axios
+      .post("http://172.31.50.70/WebAPI/")
+      .then((response) => {
+        if (response.status === 200) {
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -95,8 +105,6 @@ export default function LoginModal(props) {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
-                  component={Link}
-                  to={"/UserPage"}
                 >
                   ログイン
                 </Button>
