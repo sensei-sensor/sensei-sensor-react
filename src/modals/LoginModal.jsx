@@ -26,17 +26,22 @@ const style = {
 export default function LoginModal(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const formData = new FormData(event.currentTarget);
 
     axios
-      .post("http://172.31.50.70/WebAPI/")
+      .post(
+        "http://localhost/WebAPI/login",
+        {
+          userName: formData.get("userName"),
+          password: formData.get("password"),
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         if (response.status === 200) {
+          console.log("Login success");
         }
       })
       .catch((error) => {
@@ -80,10 +85,10 @@ export default function LoginModal(props) {
                   margin="normal"
                   required
                   fullWidth
-                  id="email"
+                  id="userName"
                   label="ユーザー名"
-                  name="email"
-                  autoComplete="email"
+                  name="userName"
+                  autoComplete="username"
                   autoFocus
                 />
                 <TextField
