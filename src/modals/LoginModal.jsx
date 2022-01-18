@@ -9,8 +9,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import axios from "axios";
 import React from "react";
-import { Link } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -26,12 +26,27 @@ const style = {
 export default function LoginModal(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const formData = new FormData(event.currentTarget);
+
+    axios
+      .post(
+        "http://localhost/WebAPI/login",
+        {
+          userName: formData.get("userName"),
+          password: formData.get("password"),
+        },
+        {
+          withCredentials: true,
+        }
+      )
+      .then((response) => {
+        if (response.status === 200) {
+          console.log("Login success");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -70,10 +85,10 @@ export default function LoginModal(props) {
                   margin="normal"
                   required
                   fullWidth
-                  id="email"
+                  id="userName"
                   label="ユーザー名"
-                  name="email"
-                  autoComplete="email"
+                  name="userName"
+                  autoComplete="username"
                   autoFocus
                 />
                 <TextField
@@ -95,8 +110,6 @@ export default function LoginModal(props) {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
-                  component={Link}
-                  to={"/UserPage"}
                 >
                   ログイン
                 </Button>
