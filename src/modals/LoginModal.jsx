@@ -30,7 +30,7 @@ export default function LoginModal(props) {
 
     axios
       .post(
-        "http://localhost/WebAPI/login",
+        "http://172.31.50.70/WebAPI/login",
         {
           userName: formData.get("userName"),
           password: formData.get("password"),
