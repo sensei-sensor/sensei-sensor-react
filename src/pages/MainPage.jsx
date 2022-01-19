@@ -79,7 +79,6 @@ export default function MainPage() {
     );
   } else {
     if (groupList) {
-      console.log(groupList.users);
       return (
         <GenericTemplate
           groupIdList={groupIdList}

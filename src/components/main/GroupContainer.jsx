@@ -3,7 +3,6 @@ import React from "react";
 import TeacherCard from "./TeacherCard";
 
 export default function GroupContainer(props) {
-  console.log(props.users);
   return (
     <Container>
       <Box m={3} pt={2} borderRadius={5} textAlign={"center"} bgcolor={"white"}>
@@ -12,7 +11,6 @@ export default function GroupContainer(props) {
         </Typography>
         <Box display={"flex"} flexWrap={"wrap"} justifyContent={"center"}>
           {Object.keys(props.users).map((key) => {
-            console.log(key);
             return (
               <TeacherCard
                 key={key}
