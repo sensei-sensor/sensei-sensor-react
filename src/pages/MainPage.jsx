@@ -1,4 +1,5 @@
 import { Box, Button, Container } from "@mui/material";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import GenericTemplate from "../GenericTemplate.jsx";
 import GroupContainer from "../components/main/GroupContainer";
@@ -10,7 +11,7 @@ export default function MainPage() {
     return JSON.parse(localStorage.getItem("groupId"));
   }
 
-  const [groupOpen, setGroupOpen] = React.useState(false);
+  const [groupOpen, setGroupOpen] = useState(false);
   const [groupIdList, setGroupIdList] = useState(
     localStorage.getItem("groupId")
       ? JSON.parse(localStorage.getItem("groupId"))
@@ -20,9 +21,33 @@ export default function MainPage() {
   const handleGroupClose = () => setGroupOpen(false);
   const groupButtonVisible = groupIdList.length !== 0;
 
+  const [groupList, setGroupList] = useState(null);
+
   useEffect(() => {
     localStorage.setItem("groupId", JSON.stringify(groupIdList));
   }, [groupIdList]);
+
+  useEffect(() => {
+    if (groupIdList !== null) {
+      groupIdList.map((groupId) => {
+        axios
+          .get(
+            import.meta.env.VITE_API_HOST +
+              "sensei-sensor-php/WebAPI/groups/" +
+              groupId +
+              "/"
+          )
+          .then((response) => {
+            setGroupList(response.data);
+            return true;
+          })
+          .catch((error) => {
+            console.log(error);
+            return false;
+          });
+      });
+    }
+  }, []);
 
   if (groupIdList.length === 0) {
     return (
@@ -53,16 +78,22 @@ export default function MainPage() {
       </GenericTemplate>
     );
   } else {
-    return (
-      <GenericTemplate
-        groupIdList={groupIdList}
-        setGroupIdList={setGroupIdList}
-        groupButtonVisible={groupButtonVisible}
-      >
-        {groupIdList.map((data) => {
-          return <GroupContainer key={data} />;
-        })}
-      </GenericTemplate>
-    );
+    if (groupList) {
+      console.log(groupList);
+      return (
+        <GenericTemplate
+          groupIdList={groupIdList}
+          setGroupIdList={setGroupIdList}
+          groupButtonVisible={groupButtonVisible}
+        >
+          <GroupContainer
+            groupName={groupList.groupName}
+            users={groupList.users}
+          />
+        </GenericTemplate>
+      );
+    } else {
+      return null;
+    }
   }
 }
