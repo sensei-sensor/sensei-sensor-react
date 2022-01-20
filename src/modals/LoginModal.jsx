@@ -10,6 +10,7 @@ import {
   Typography,
   Snackbar,
   Portal,
+  Alert,
 } from "@mui/material";
 import axios from "axios";
 import React from "react";
@@ -134,9 +135,16 @@ export default function LoginModal(props) {
           open={snackbarOpen}
           autoHideDuration={3000}
           onClose={handleSnackbarClose}
-          message="ユーザー名またはパスワードが間違っています"
           key={vertical + horizontal}
-        />
+        >
+          <Alert
+            onClose={handleSnackbarClose}
+            severity="error"
+            sx={{ width: "100%" }}
+          >
+            ユーザー名またはパスワードが間違っています
+          </Alert>
+        </Snackbar>
       </Portal>
     </div>
   );
