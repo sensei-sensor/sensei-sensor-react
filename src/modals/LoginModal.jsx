@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -27,6 +28,8 @@ const style = {
 };
 
 export default function LoginModal(props) {
+  const navigate = useNavigate();
+
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
@@ -51,7 +54,7 @@ export default function LoginModal(props) {
       )
       .then((response) => {
         if (response.status === 200) {
-          console.log("Login success");
+          navigate("UserPage");
         }
       })
       .catch((error) => {

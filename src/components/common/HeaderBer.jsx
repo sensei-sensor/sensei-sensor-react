@@ -6,8 +6,9 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import AddGroupIdModal from "../../modals/AddGroupIdModal";
 import LoginModal from "../../modals/LoginModal";
 
@@ -20,6 +21,13 @@ export default function HeaderBer(props) {
   const handleGroupOpen = () => setGroupOpen(true);
   const handleGroupClose = () => setGroupOpen(false);
 
+  const [isLogin, setIsLogin] = useState(false);
+  const navigate = useNavigate();
+
+  const handleMyPageClick = () => {
+    navigate("UserPage");
+  };
+
   const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
   const title = {
@@ -27,6 +35,17 @@ export default function HeaderBer(props) {
     textDecoration: "none",
     color: "primary.main",
   };
+
+  useEffect(() => {
+    axios
+      .post(
+        import.meta.env.VITE_API_HOST + "sensei-sensor-php/WebAPI/checkLogin/",
+        null,
+        { withCredentials: true }
+      )
+      .then(setIsLogin(true))
+      .catch(setIsLogin(false));
+  }, []);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -55,9 +74,15 @@ export default function HeaderBer(props) {
               />
             </>
           )}
-          <Button color="primary" onClick={handleLoginOpen}>
-            <Box fontWeight={700}>先生向けログイン</Box>
-          </Button>
+          {isLogin ? (
+            <Button color="primary" onClick={handleMyPageClick}>
+              <Box fontWeight={700}>マイページ</Box>
+            </Button>
+          ) : (
+            <Button color="primary" onClick={handleLoginOpen}>
+              <Box fontWeight={700}>先生向けログイン</Box>
+            </Button>
+          )}
           <LoginModal open={loginOpen} handleClose={handleLoginClose} />
         </Toolbar>
       </AppBar>
