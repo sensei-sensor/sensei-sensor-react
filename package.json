@@ -2,7 +2,7 @@
   "name": "sensei-sensor-react",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "serve": "vite preview",
     "format": "prettier --write ./**/*.{js,jsx,html,css,scss,md,json}",

@@ -8,6 +8,8 @@ import {
   Modal,
   TextField,
   Typography,
+  Snackbar,
+  Portal,
 } from "@mui/material";
 import axios from "axios";
 import React from "react";
@@ -24,6 +26,13 @@ const style = {
 };
 
 export default function LoginModal(props) {
+  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+  const vertical = "bottom";
+  const horizontal = "center";
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -46,11 +55,22 @@ export default function LoginModal(props) {
       })
       .catch((error) => {
         console.log(error);
+        setSnackbarOpen(true);
       });
   };
 
   return (
     <div>
+      <Portal>
+        <Snackbar
+          anchorOrigin={{ vertical, horizontal }}
+          open={snackbarOpen}
+          autoHideDuration={3000}
+          onClose={handleSnackbarClose}
+          message="ユーザー名またはパスワードが間違っています"
+          key={vertical + horizontal}
+        />
+      </Portal>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
