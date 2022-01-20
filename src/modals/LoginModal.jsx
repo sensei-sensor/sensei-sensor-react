@@ -61,16 +61,6 @@ export default function LoginModal(props) {
 
   return (
     <div>
-      <Portal>
-        <Snackbar
-          anchorOrigin={{ vertical, horizontal }}
-          open={snackbarOpen}
-          autoHideDuration={3000}
-          onClose={handleSnackbarClose}
-          message="ユーザー名またはパスワードが間違っています"
-          key={vertical + horizontal}
-        />
-      </Portal>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -138,6 +128,16 @@ export default function LoginModal(props) {
           </Box>
         </Fade>
       </Modal>
+      <Portal>
+        <Snackbar
+          anchorOrigin={{ vertical, horizontal }}
+          open={snackbarOpen}
+          autoHideDuration={3000}
+          onClose={handleSnackbarClose}
+          message="ユーザー名またはパスワードが間違っています"
+          key={vertical + horizontal}
+        />
+      </Portal>
     </div>
   );
 }
