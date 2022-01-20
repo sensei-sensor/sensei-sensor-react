@@ -39,11 +39,9 @@ export default function MainPage() {
           )
           .then((response) => {
             setGroupList(response.data);
-            return true;
           })
           .catch((error) => {
             console.log(error);
-            return false;
           });
       });
     }
