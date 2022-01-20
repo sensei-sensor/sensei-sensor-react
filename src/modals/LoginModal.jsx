@@ -30,7 +30,7 @@ export default function LoginModal(props) {
 
     axios
       .post(
-        import.meta.env.VITE_API_HOST + "/sensei-sensor-php/WebAPI/login/",
+        import.meta.env.VITE_API_HOST + "sensei-sensor-php/WebAPI/login/",
         {
           userName: formData.get("userName"),
           password: formData.get("password"),
