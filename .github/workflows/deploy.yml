@@ -6,7 +6,7 @@ name: Deploy development server
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -34,7 +34,6 @@ jobs:
           touch .env
           echo "VITE_API_HOST=${{ secrets.API_HOST }}" >> .env
       - run: npm run build
-      
       - name: copy file via ssh password 1
         uses: appleboy/scp-action@master
         with:
