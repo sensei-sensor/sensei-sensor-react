@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import AddGroupIdModal from "../../modals/AddGroupIdModal";
 import LoginModal from "../../modals/LoginModal";
 
@@ -21,11 +21,27 @@ export default function HeaderBer(props) {
   const handleGroupOpen = () => setGroupOpen(true);
   const handleGroupClose = () => setGroupOpen(false);
 
-  const [isLogin, setIsLogin] = useState(false);
-  const handleIsLogin = () => setIsLogin(true);
-  const handleIsNotLogin = () => setIsLogin(false);
+  const [isLogin, setIsLogin] = useState(null);
+
+  const handleLogoutClick = () => {
+    axios
+      .post(
+        import.meta.env.VITE_API_HOST + "sensei-sensor-php/WebAPI/logout/",
+        null,
+        { withCredentials: true }
+      )
+      .then((response) => {
+        if (response.status === 200) {
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleMyPageClick = () => {
     navigate("UserPage");
@@ -46,9 +62,39 @@ export default function HeaderBer(props) {
         null,
         { withCredentials: true }
       )
-      .then(handleIsLogin)
-      .catch(handleIsNotLogin);
+      .then((response) => {
+        if (response.status === 200) {
+          setIsLogin(true);
+        } else {
+          setIsLogin(false);
+        }
+      })
+      .catch(() => {
+        setIsLogin(false);
+      });
   }, []);
+
+  let button;
+
+  if (location.pathname === "/UserPage" && isLogin) {
+    button = (
+      <Button color="primary" onClick={handleLogoutClick}>
+        <Box fontWeight={700}>ログアウト</Box>
+      </Button>
+    );
+  } else if (isLogin) {
+    button = (
+      <Button color="primary" onClick={handleMyPageClick}>
+        <Box fontWeight={700}>マイページ</Box>
+      </Button>
+    );
+  } else {
+    button = (
+      <Button color="primary" onClick={handleLoginOpen}>
+        <Box fontWeight={700}>先生向けログイン</Box>
+      </Button>
+    );
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -77,15 +123,7 @@ export default function HeaderBer(props) {
               />
             </>
           )}
-          {isLogin ? (
-            <Button color="primary" onClick={handleMyPageClick}>
-              <Box fontWeight={700}>マイページ</Box>
-            </Button>
-          ) : (
-            <Button color="primary" onClick={handleLoginOpen}>
-              <Box fontWeight={700}>先生向けログイン</Box>
-            </Button>
-          )}
+          {button}
           <LoginModal open={loginOpen} handleClose={handleLoginClose} />
         </Toolbar>
       </AppBar>
