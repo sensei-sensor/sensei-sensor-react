@@ -4,7 +4,7 @@ import GenericTemplate from "../GenericTemplate.jsx";
 import GroupContainer from "../components/main/GroupContainer";
 import AddGroupIdModal from "../modals/AddGroupIdModal";
 
-export default function MainPage() {
+export default function MainPage(props) {
   function setLocalStorage() {
     localStorage.setItem("groupId", JSON.stringify([]));
     return JSON.parse(localStorage.getItem("groupId"));
@@ -58,6 +58,7 @@ export default function MainPage() {
         groupIdList={groupIdList}
         setGroupIdList={setGroupIdList}
         groupButtonVisible={groupButtonVisible}
+        isLogin={props.isLogin}
       >
         {groupIdList.map((data) => {
           return <GroupContainer key={data} />;

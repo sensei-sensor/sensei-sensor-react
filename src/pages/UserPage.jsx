@@ -6,9 +6,9 @@ import PublicationDays from "../components/user/PublicationDays";
 import PublicationList from "../components/user/PublicationList";
 import PublicationTime from "../components/user/PublicationTime";
 
-export default function UserPage() {
+export default function UserPage(props) {
   return (
-    <GenericTemplate>
+    <GenericTemplate isLogin={props.isLogin}>
       <Container>
         <Box m={3} p={2} borderRadius={5} bgcolor={"white"}>
           <Box textAlign={"center"}>

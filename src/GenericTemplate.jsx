@@ -53,6 +53,7 @@ export default function GenericTemplate(props) {
         groupIdList={props.groupIdList}
         setGroupIdList={props.setGroupIdList}
         groupButtonVisible={props.groupButtonVisible}
+        props={props.isLogin}
       />
       {props.children}
     </ThemeProvider>

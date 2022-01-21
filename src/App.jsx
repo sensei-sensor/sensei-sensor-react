@@ -1,12 +1,18 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import DisasterPage from "./pages/DisasterPage";
 import MainPage from "./pages/MainPage";
 import UserPage from "./pages/UserPage";
-import axios from "axios";
 
 export default function App() {
   const [isLogin, setIsLogin] = useState(null);
+  const handleLogin = () => {
+    setIsLogin(true);
+  };
+  const handleLogout = () => {
+    setIsLogin(false);
+  };
 
   useEffect(() => {
     axios
@@ -17,11 +23,13 @@ export default function App() {
       )
       .then((response) => {
         if (response.status === 200) {
-          setIsLogin(true);
+          handleLogin();
+        } else {
+          handleLogout();
         }
       })
       .catch(() => {
-        setIsLogin(false);
+        handleLogout();
       });
   }, []);
 
@@ -32,13 +40,13 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path={"/"} element={<MainPage />} />
+        <Route exact path={"/"} element={<MainPage isLogin={isLogin} />} />
         <Route path={"/DisasterPage"} element={<DisasterPage />} />
         <Route
           path={"/UserPage"}
           element={
             <PrivateRoute>
-              <UserPage />
+              <UserPage isLogin={isLogin} />
             </PrivateRoute>
           }
         />

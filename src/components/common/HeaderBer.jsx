@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import AddGroupIdModal from "../../modals/AddGroupIdModal";
 import LoginModal from "../../modals/LoginModal";
@@ -20,8 +20,6 @@ export default function HeaderBer(props) {
   const [groupOpen, setGroupOpen] = useState(false);
   const handleGroupOpen = () => setGroupOpen(true);
   const handleGroupClose = () => setGroupOpen(false);
-
-  const [isLogin, setIsLogin] = useState(null);
 
   const handleLogoutClick = () => {
     axios
@@ -55,34 +53,34 @@ export default function HeaderBer(props) {
     color: "primary.main",
   };
 
-  useEffect(() => {
-    axios
-      .post(
-        import.meta.env.VITE_API_HOST + "sensei-sensor-php/WebAPI/checkLogin/",
-        null,
-        { withCredentials: true }
-      )
-      .then((response) => {
-        if (response.status === 200) {
-          setIsLogin(true);
-        } else {
-          setIsLogin(false);
-        }
-      })
-      .catch(() => {
-        setIsLogin(false);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .post(
+  //       import.meta.env.VITE_API_HOST + "sensei-sensor-php/WebAPI/checkLogin/",
+  //       null,
+  //       { withCredentials: true }
+  //     )
+  //     .then((response) => {
+  //       if (response.status === 200) {
+  //         setIsLogin(true);
+  //       } else {
+  //         setIsLogin(false);
+  //       }
+  //     })
+  //     .catch(() => {
+  //       setIsLogin(false);
+  //     });
+  // }, []);
 
   let button;
 
-  if (location.pathname === "/UserPage" && isLogin) {
+  if (location.pathname === "/UserPage" && props.isLogin) {
     button = (
       <Button color="primary" onClick={handleLogoutClick}>
         <Box fontWeight={700}>ログアウト</Box>
       </Button>
     );
-  } else if (isLogin) {
+  } else if (props.isLogin) {
     button = (
       <Button color="primary" onClick={handleMyPageClick}>
         <Box fontWeight={700}>マイページ</Box>
