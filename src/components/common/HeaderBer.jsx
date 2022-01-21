@@ -22,6 +22,9 @@ export default function HeaderBer(props) {
   const handleGroupClose = () => setGroupOpen(false);
 
   const [isLogin, setIsLogin] = useState(false);
+  const handleIsLogin = () => setIsLogin(true);
+  const handleIsNotLogin = () => setIsLogin(false);
+
   const navigate = useNavigate();
 
   const handleMyPageClick = () => {
@@ -43,8 +46,8 @@ export default function HeaderBer(props) {
         null,
         { withCredentials: true }
       )
-      .then(setIsLogin(true))
-      .catch(setIsLogin(false));
+      .then(handleIsLogin)
+      .catch(handleIsNotLogin);
   }, []);
 
   return (
