@@ -79,6 +79,8 @@ export default function MainPage(props) {
     if (groupList) {
       return (
         <GenericTemplate
+          isLogin={props.isLogin}
+          handleLogin={props.handleLogin}
           groupIdList={groupIdList}
           setGroupList={setGroupList}
           setGroupIdList={setGroupIdList}
