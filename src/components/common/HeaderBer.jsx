@@ -50,11 +50,11 @@ export default function HeaderBer(props) {
   };
 
   const handleMyPageClick = () => {
-    navigate("UserPage");
+    navigate("user");
   };
 
   let button;
-  if (location.pathname === "/UserPage" && props.isLogin) {
+  if (location.pathname === "/user" && props.isLogin) {
     button = (
       <Button color="primary" onClick={handleLogoutClick}>
         <Box fontWeight={700}>ログアウト</Box>

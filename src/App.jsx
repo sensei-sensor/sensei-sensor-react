@@ -45,9 +45,9 @@ export default function App() {
             path={"/"}
             element={<MainPage isLogin={isLogin} handleLogin={handleLogin} />}
           />
-          <Route path={"/DisasterPage"} element={<DisasterPage />} />
+          <Route path={"/disaster"} element={<DisasterPage />} />
           <Route
-            path={"/UserPage"}
+            path={"/user"}
             element={
               <PrivateRoute>
                 <UserPage isLogin={isLogin} handleLogout={handleLogout} />
