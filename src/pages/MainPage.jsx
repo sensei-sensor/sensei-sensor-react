@@ -1,4 +1,5 @@
 import { Box, Button, Container } from "@mui/material";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import GenericTemplate from "../GenericTemplate.jsx";
 import GroupContainer from "../components/main/GroupContainer";
@@ -10,7 +11,7 @@ export default function MainPage(props) {
     return JSON.parse(localStorage.getItem("groupId"));
   };
 
-  const [groupOpen, setGroupOpen] = React.useState(false);
+  const [groupOpen, setGroupOpen] = useState(false);
   const [groupIdList, setGroupIdList] = useState(
     localStorage.getItem("groupId")
       ? JSON.parse(localStorage.getItem("groupId"))
@@ -22,9 +23,28 @@ export default function MainPage(props) {
 
   const visibleGroupButton = groupIdList.length !== 0;
 
+  const [groupList, setGroupList] = useState(null);
+
   useEffect(() => {
     localStorage.setItem("groupId", JSON.stringify(groupIdList));
   }, [groupIdList]);
+
+  useEffect(() => {
+    if (groupIdList !== null) {
+      axios
+        .post(
+          import.meta.env.VITE_API_HOST + "sensei-sensor-php/WebAPI/groups/",
+          { groupId: groupIdList }
+        )
+        .then((response) => {
+          setGroupList(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (groupIdList.length === 0) {
     return (
@@ -50,23 +70,33 @@ export default function MainPage(props) {
           open={groupOpen}
           handleClose={handleGroupClose}
           groupIdList={groupIdList}
+          setGroupList={setGroupList}
           setGroupIdList={setGroupIdList}
         />
       </GenericTemplate>
     );
   } else {
-    return (
-      <GenericTemplate
-        groupIdList={groupIdList}
-        setGroupIdList={setGroupIdList}
-        visibleGroupButton={visibleGroupButton}
-        isLogin={props.isLogin}
-        handleLogin={props.handleLogin}
-      >
-        {groupIdList.map((data) => {
-          return <GroupContainer key={data} />;
-        })}
-      </GenericTemplate>
-    );
+    if (groupList) {
+      return (
+        <GenericTemplate
+          groupIdList={groupIdList}
+          setGroupList={setGroupList}
+          setGroupIdList={setGroupIdList}
+          visibleGroupButton={visibleGroupButton}
+        >
+          {Object.keys(groupList).map((key) => {
+            return (
+              <GroupContainer
+                key={key}
+                groupName={groupList[key].groupName}
+                users={groupList[key].users}
+              />
+            );
+          })}
+        </GenericTemplate>
+      );
+    } else {
+      return null;
+    }
   }
 }

@@ -7,6 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import axios from "axios";
 import React, { useRef, useState } from "react";
 
 const style = {
@@ -27,6 +28,22 @@ export default function AddGroupIdModal(props) {
     "グループIDは半角英数で入力してください"
   );
 
+  const getGroupList = (groupIdList) => {
+    axios
+      .post(
+        import.meta.env.VITE_API_HOST + "sensei-sensor-php/WebAPI/groups/",
+        { groupId: groupIdList }
+      )
+      .then((response) => {
+        setHelperText("");
+        props.setGroupList(response.data);
+        props.handleClose();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -34,7 +51,7 @@ export default function AddGroupIdModal(props) {
 
     for (let i = 0; i < props.groupIdList.length; i++) {
       if (props.groupIdList[i] === groupId) {
-        setHelperText("そのグループIDは登録されています");
+        setHelperText("そのグループIDはすでに登録されています");
         setInputError(true);
         return;
       }
@@ -45,13 +62,29 @@ export default function AddGroupIdModal(props) {
       if (!ref.validity.valid) {
         setHelperText("グループIDは半角英数かつ必須です");
         setInputError(true);
+        return;
       } else {
-        props.setGroupIdList((groupIdList) => [...groupIdList, groupId]);
-        props.handleClose();
-        setHelperText("");
         setInputError(false);
       }
     }
+
+    axios
+      .get(
+        import.meta.env.VITE_API_HOST +
+          "sensei-sensor-php/WebAPI/groups/" +
+          groupId +
+          "/"
+      )
+      .then(() => {
+        props.setGroupIdList((groupIdList) => [...groupIdList, groupId]);
+        getGroupList([...props.groupIdList, groupId]);
+      })
+      .catch((error) => {
+        console.log(error);
+        setHelperText("存在しないグループIDです");
+        setInputError(true);
+        return;
+      });
   };
 
   return (

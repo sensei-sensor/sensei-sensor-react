@@ -51,6 +51,7 @@ export default function GenericTemplate(props) {
       <CssBaseline />
       <HeaderBer
         groupIdList={props.groupIdList}
+        setGroupList={props.setGroupList}
         setGroupIdList={props.setGroupIdList}
         visibleGroupButton={props.visibleGroupButton}
         isLogin={props.isLogin}

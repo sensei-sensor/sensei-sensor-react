@@ -96,6 +96,7 @@ export default function HeaderBer(props) {
               <AddGroupIdModal
                 open={groupOpen}
                 handleClose={handleGroupClose}
+                setGroupList={props.setGroupList}
                 groupIdList={props.groupIdList}
                 setGroupIdList={props.setGroupIdList}
               />
