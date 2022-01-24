@@ -31,21 +31,17 @@ export default function MainPage(props) {
 
   useEffect(() => {
     if (groupIdList !== null) {
-      groupIdList.map((groupId) => {
-        axios
-          .get(
-            import.meta.env.VITE_API_HOST +
-              "sensei-sensor-php/WebAPI/groups/" +
-              groupId +
-              "/"
-          )
-          .then((response) => {
-            setGroupList(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      });
+      axios
+        .post(
+          import.meta.env.VITE_API_HOST + "sensei-sensor-php/WebAPI/groups/",
+          { groupId: groupIdList }
+        )
+        .then((response) => {
+          setGroupList(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   }, []);
 
@@ -85,10 +81,15 @@ export default function MainPage(props) {
           setGroupIdList={setGroupIdList}
           visibleGroupButton={visibleGroupButton}
         >
-          <GroupContainer
-            groupName={groupList.groupName}
-            users={groupList.users}
-          />
+          {Object.keys(groupList).map((key) => {
+            return (
+              <GroupContainer
+                key={key}
+                groupName={groupList[key].groupName}
+                users={groupList[key].users}
+              />
+            );
+          })}
         </GenericTemplate>
       );
     } else {
