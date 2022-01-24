@@ -40,7 +40,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path={"/"} element={<MainPage isLogin={isLogin} />} />
+        <Route path={"/"} element={<MainPage isLogin={isLogin} />} />
         <Route path={"/DisasterPage"} element={<DisasterPage />} />
         <Route
           path={"/UserPage"}
