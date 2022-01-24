@@ -1,33 +1,61 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import DisasterPage from "./pages/DisasterPage";
 import MainPage from "./pages/MainPage";
 import UserPage from "./pages/UserPage";
 
 export default function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route exact path={"/"} element={<MainPage />} />
-        <Route path={"/DisasterPage"} element={<DisasterPage />} />
-        <Route
-          path={"/UserPage"}
-          element={
-            <PrivateRoute>
-              <UserPage />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
-  );
-}
+  const [isLogin, setIsLogin] = useState(null);
+  const handleLogin = () => {
+    setIsLogin(true);
+  };
+  const handleLogout = () => {
+    setIsLogin(false);
+  };
 
-function PrivateRoute({ children }) {
-  const auth = useAuth();
-  return auth ? children : <Navigate to="/" />;
-}
+  useEffect(() => {
+    axios
+      .post(
+        import.meta.env.VITE_API_HOST + "sensei-sensor-php/WebAPI/checkLogin/",
+        null,
+        { withCredentials: true }
+      )
+      .then((response) => {
+        if (response.status === 200) {
+          handleLogin();
+        }
+      })
+      .catch(() => {
+        handleLogout();
+      });
+  }, []);
 
-function useAuth() {
-  return true;
+  const PrivateRoute = ({ children }) => {
+    return isLogin ? children : <Navigate to="/" />;
+  };
+
+  if (isLogin === null) {
+    return <div>Loading...</div>;
+  } else {
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path={"/"}
+            element={<MainPage isLogin={isLogin} handleLogin={handleLogin} />}
+          />
+          <Route path={"/DisasterPage"} element={<DisasterPage />} />
+          <Route
+            path={"/UserPage"}
+            element={
+              <PrivateRoute>
+                <UserPage isLogin={isLogin} handleLogout={handleLogout} />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    );
+  }
 }

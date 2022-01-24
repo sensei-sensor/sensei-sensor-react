@@ -37,7 +37,7 @@ export default function LoginModal(props) {
   const vertical = "bottom";
   const horizontal = "center";
 
-  const handleSubmit = (event) => {
+  const handleLoginSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
@@ -54,6 +54,7 @@ export default function LoginModal(props) {
       )
       .then((response) => {
         if (response.status === 200) {
+          props.handleLogin();
           navigate("UserPage");
         }
       })
@@ -91,7 +92,7 @@ export default function LoginModal(props) {
               </Typography>
               <Box
                 component="form"
-                onSubmit={handleSubmit}
+                onSubmit={handleLoginSubmit}
                 noValidate
                 sx={{ mt: 1 }}
               >
