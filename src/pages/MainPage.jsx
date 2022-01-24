@@ -5,21 +5,23 @@ import GenericTemplate from "../GenericTemplate.jsx";
 import GroupContainer from "../components/main/GroupContainer";
 import AddGroupIdModal from "../modals/AddGroupIdModal";
 
-export default function MainPage() {
-  function setLocalStorage() {
+export default function MainPage(props) {
+  const initialLocalStorage = () => {
     localStorage.setItem("groupId", JSON.stringify([]));
     return JSON.parse(localStorage.getItem("groupId"));
-  }
+  };
 
   const [groupOpen, setGroupOpen] = useState(false);
   const [groupIdList, setGroupIdList] = useState(
     localStorage.getItem("groupId")
       ? JSON.parse(localStorage.getItem("groupId"))
-      : setLocalStorage()
+      : initialLocalStorage()
   );
+
   const handleGroupOpen = () => setGroupOpen(true);
   const handleGroupClose = () => setGroupOpen(false);
-  const groupButtonVisible = groupIdList.length !== 0;
+
+  const visibleGroupButton = groupIdList.length !== 0;
 
   const [groupList, setGroupList] = useState(null);
 
@@ -49,7 +51,7 @@ export default function MainPage() {
 
   if (groupIdList.length === 0) {
     return (
-      <GenericTemplate>
+      <GenericTemplate isLogin={props.isLogin} handleLogin={props.handleLogin}>
         <Container>
           <Box
             borderRadius={5}

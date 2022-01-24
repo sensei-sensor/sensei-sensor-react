@@ -8,9 +8,13 @@ import {
   Modal,
   TextField,
   Typography,
+  Snackbar,
+  Portal,
+  Alert,
 } from "@mui/material";
 import axios from "axios";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -24,13 +28,22 @@ const style = {
 };
 
 export default function LoginModal(props) {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+
+  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+  const vertical = "bottom";
+  const horizontal = "center";
+
+  const handleLoginSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
     axios
       .post(
-        import.meta.env.VITE_API_HOST + "/sensei-sensor-php/WebAPI/login/",
+        import.meta.env.VITE_API_HOST + "sensei-sensor-php/WebAPI/login/",
         {
           userName: formData.get("userName"),
           password: formData.get("password"),
@@ -41,11 +54,13 @@ export default function LoginModal(props) {
       )
       .then((response) => {
         if (response.status === 200) {
-          console.log("Login success");
+          props.handleLogin();
+          navigate("UserPage");
         }
       })
       .catch((error) => {
         console.log(error);
+        setSnackbarOpen(true);
       });
   };
 
@@ -77,7 +92,7 @@ export default function LoginModal(props) {
               </Typography>
               <Box
                 component="form"
-                onSubmit={handleSubmit}
+                onSubmit={handleLoginSubmit}
                 noValidate
                 sx={{ mt: 1 }}
               >
@@ -118,6 +133,23 @@ export default function LoginModal(props) {
           </Box>
         </Fade>
       </Modal>
+      <Portal>
+        <Snackbar
+          anchorOrigin={{ vertical, horizontal }}
+          open={snackbarOpen}
+          autoHideDuration={3000}
+          onClose={handleSnackbarClose}
+          key={vertical + horizontal}
+        >
+          <Alert
+            onClose={handleSnackbarClose}
+            severity="error"
+            sx={{ width: "100%" }}
+          >
+            ユーザー名またはパスワードが間違っています
+          </Alert>
+        </Snackbar>
+      </Portal>
     </div>
   );
 }
