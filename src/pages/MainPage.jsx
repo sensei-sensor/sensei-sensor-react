@@ -83,7 +83,7 @@ export default function MainPage(props) {
         <GenericTemplate
           groupIdList={groupIdList}
           setGroupIdList={setGroupIdList}
-          groupButtonVisible={groupButtonVisible}
+          visibleGroupButton={visibleGroupButton}
         >
           <GroupContainer
             groupName={groupList.groupName}
