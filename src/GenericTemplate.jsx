@@ -53,7 +53,9 @@ export default function GenericTemplate(props) {
         groupIdList={props.groupIdList}
         setGroupIdList={props.setGroupIdList}
         visibleGroupButton={props.visibleGroupButton}
-        props={props.isLogin}
+        isLogin={props.isLogin}
+        handleLogout={props.handleLogout}
+        handleLogin={props.handleLogin}
       />
       {props.children}
     </ThemeProvider>

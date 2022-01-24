@@ -24,8 +24,6 @@ export default function App() {
       .then((response) => {
         if (response.status === 200) {
           handleLogin();
-        } else {
-          handleLogout();
         }
       })
       .catch(() => {
@@ -34,19 +32,22 @@ export default function App() {
   }, []);
 
   const PrivateRoute = ({ children }) => {
-    return isLogin ? children : <Navigate to="" />;
+    return isLogin ? children : <Navigate to="/" />;
   };
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={"/"} element={<MainPage isLogin={isLogin} />} />
+        <Route
+          path={"/"}
+          element={<MainPage isLogin={isLogin} handleLogin={handleLogin} />}
+        />
         <Route path={"/DisasterPage"} element={<DisasterPage />} />
         <Route
           path={"/UserPage"}
           element={
             <PrivateRoute>
-              <UserPage isLogin={isLogin} />
+              <UserPage isLogin={isLogin} handleLogout={handleLogout} />
             </PrivateRoute>
           }
         />

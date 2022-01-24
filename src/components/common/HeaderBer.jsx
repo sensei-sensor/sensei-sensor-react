@@ -40,6 +40,7 @@ export default function HeaderBer(props) {
       )
       .then((response) => {
         if (response.status === 200) {
+          props.handleLogout();
           navigate("/");
         }
       })
@@ -73,25 +74,6 @@ export default function HeaderBer(props) {
     );
   }
 
-  // useEffect(() => {
-  //   axios
-  //     .post(
-  //       import.meta.env.VITE_API_HOST + "sensei-sensor-php/WebAPI/checkLogin/",
-  //       null,
-  //       { withCredentials: true }
-  //     )
-  //     .then((response) => {
-  //       if (response.status === 200) {
-  //         setIsLogin(true);
-  //       } else {
-  //         setIsLogin(false);
-  //       }
-  //     })
-  //     .catch(() => {
-  //       setIsLogin(false);
-  //     });
-  // }, []);
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar color={"inherit"}>
@@ -120,7 +102,11 @@ export default function HeaderBer(props) {
             </>
           )}
           {button}
-          <LoginModal open={loginOpen} handleClose={handleLoginClose} />
+          <LoginModal
+            open={loginOpen}
+            handleClose={handleLoginClose}
+            handleLogin={props.handleLogin}
+          />
         </Toolbar>
       </AppBar>
       <Offset />

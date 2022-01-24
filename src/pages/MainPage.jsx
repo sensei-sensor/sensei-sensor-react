@@ -5,7 +5,7 @@ import GroupContainer from "../components/main/GroupContainer";
 import AddGroupIdModal from "../modals/AddGroupIdModal";
 
 export default function MainPage(props) {
-  const setLocalStorage = () => {
+  const initialLocalStorage = () => {
     localStorage.setItem("groupId", JSON.stringify([]));
     return JSON.parse(localStorage.getItem("groupId"));
   };
@@ -14,7 +14,7 @@ export default function MainPage(props) {
   const [groupIdList, setGroupIdList] = useState(
     localStorage.getItem("groupId")
       ? JSON.parse(localStorage.getItem("groupId"))
-      : setLocalStorage()
+      : initialLocalStorage()
   );
 
   const handleGroupOpen = () => setGroupOpen(true);
@@ -28,7 +28,7 @@ export default function MainPage(props) {
 
   if (groupIdList.length === 0) {
     return (
-      <GenericTemplate>
+      <GenericTemplate isLogin={props.isLogin} handleLogin={props.handleLogin}>
         <Container>
           <Box
             borderRadius={5}
@@ -61,6 +61,7 @@ export default function MainPage(props) {
         setGroupIdList={setGroupIdList}
         visibleGroupButton={visibleGroupButton}
         isLogin={props.isLogin}
+        handleLogin={props.handleLogin}
       >
         {groupIdList.map((data) => {
           return <GroupContainer key={data} />;

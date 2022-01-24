@@ -54,6 +54,7 @@ export default function LoginModal(props) {
       )
       .then((response) => {
         if (response.status === 200) {
+          props.handleLogin();
           navigate("UserPage");
         }
       })

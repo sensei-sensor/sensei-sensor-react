@@ -8,7 +8,7 @@ import PublicationTime from "../components/user/PublicationTime";
 
 export default function UserPage(props) {
   return (
-    <GenericTemplate isLogin={props.isLogin}>
+    <GenericTemplate isLogin={props.isLogin} handleLogout={props.handleLogout}>
       <Container>
         <Box m={3} p={2} borderRadius={5} bgcolor={"white"}>
           <Box textAlign={"center"}>
