@@ -28,6 +28,22 @@ export default function AddGroupIdModal(props) {
     "グループIDは半角英数で入力してください"
   );
 
+  const getGroupList = (groupIdList) => {
+    axios
+      .post(
+        import.meta.env.VITE_API_HOST + "sensei-sensor-php/WebAPI/groups/",
+        { groupId: groupIdList }
+      )
+      .then((response) => {
+        setHelperText("");
+        props.setGroupList(response.data);
+        props.handleClose();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -60,9 +76,8 @@ export default function AddGroupIdModal(props) {
           "/"
       )
       .then(() => {
-        setHelperText("");
         props.setGroupIdList((groupIdList) => [...groupIdList, groupId]);
-        props.handleClose();
+        getGroupList([...props.groupIdList, groupId]);
       })
       .catch((error) => {
         console.log(error);

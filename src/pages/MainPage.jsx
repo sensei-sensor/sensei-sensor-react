@@ -43,6 +43,7 @@ export default function MainPage(props) {
           console.log(error);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (groupIdList.length === 0) {
@@ -69,6 +70,7 @@ export default function MainPage(props) {
           open={groupOpen}
           handleClose={handleGroupClose}
           groupIdList={groupIdList}
+          setGroupList={setGroupList}
           setGroupIdList={setGroupIdList}
         />
       </GenericTemplate>
@@ -78,6 +80,7 @@ export default function MainPage(props) {
       return (
         <GenericTemplate
           groupIdList={groupIdList}
+          setGroupList={setGroupList}
           setGroupIdList={setGroupIdList}
           visibleGroupButton={visibleGroupButton}
         >
