@@ -5,10 +5,10 @@ import GroupContainer from "../components/main/GroupContainer";
 import AddGroupIdModal from "../modals/AddGroupIdModal";
 
 export default function MainPage(props) {
-  function setLocalStorage() {
+  const setLocalStorage = () => {
     localStorage.setItem("groupId", JSON.stringify([]));
     return JSON.parse(localStorage.getItem("groupId"));
-  }
+  };
 
   const [groupOpen, setGroupOpen] = React.useState(false);
   const [groupIdList, setGroupIdList] = useState(
@@ -16,9 +16,11 @@ export default function MainPage(props) {
       ? JSON.parse(localStorage.getItem("groupId"))
       : setLocalStorage()
   );
+
   const handleGroupOpen = () => setGroupOpen(true);
   const handleGroupClose = () => setGroupOpen(false);
-  const groupButtonVisible = groupIdList.length !== 0;
+
+  const visibleGroupButton = groupIdList.length !== 0;
 
   useEffect(() => {
     localStorage.setItem("groupId", JSON.stringify(groupIdList));
@@ -57,7 +59,7 @@ export default function MainPage(props) {
       <GenericTemplate
         groupIdList={groupIdList}
         setGroupIdList={setGroupIdList}
-        groupButtonVisible={groupButtonVisible}
+        visibleGroupButton={visibleGroupButton}
         isLogin={props.isLogin}
       >
         {groupIdList.map((data) => {

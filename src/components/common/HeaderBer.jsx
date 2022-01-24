@@ -13,6 +13,16 @@ import AddGroupIdModal from "../../modals/AddGroupIdModal";
 import LoginModal from "../../modals/LoginModal";
 
 export default function HeaderBer(props) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
+  const title = {
+    fontWeight: 700,
+    textDecoration: "none",
+    color: "primary.main",
+  };
+
   const [loginOpen, setLoginOpen] = useState(false);
   const handleLoginOpen = () => setLoginOpen(true);
   const handleLoginClose = () => setLoginOpen(false);
@@ -38,42 +48,11 @@ export default function HeaderBer(props) {
       });
   };
 
-  const navigate = useNavigate();
-  const location = useLocation();
-
   const handleMyPageClick = () => {
     navigate("UserPage");
   };
 
-  const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
-
-  const title = {
-    fontWeight: 700,
-    textDecoration: "none",
-    color: "primary.main",
-  };
-
-  // useEffect(() => {
-  //   axios
-  //     .post(
-  //       import.meta.env.VITE_API_HOST + "sensei-sensor-php/WebAPI/checkLogin/",
-  //       null,
-  //       { withCredentials: true }
-  //     )
-  //     .then((response) => {
-  //       if (response.status === 200) {
-  //         setIsLogin(true);
-  //       } else {
-  //         setIsLogin(false);
-  //       }
-  //     })
-  //     .catch(() => {
-  //       setIsLogin(false);
-  //     });
-  // }, []);
-
   let button;
-
   if (location.pathname === "/UserPage" && props.isLogin) {
     button = (
       <Button color="primary" onClick={handleLogoutClick}>
@@ -94,6 +73,25 @@ export default function HeaderBer(props) {
     );
   }
 
+  // useEffect(() => {
+  //   axios
+  //     .post(
+  //       import.meta.env.VITE_API_HOST + "sensei-sensor-php/WebAPI/checkLogin/",
+  //       null,
+  //       { withCredentials: true }
+  //     )
+  //     .then((response) => {
+  //       if (response.status === 200) {
+  //         setIsLogin(true);
+  //       } else {
+  //         setIsLogin(false);
+  //       }
+  //     })
+  //     .catch(() => {
+  //       setIsLogin(false);
+  //     });
+  // }, []);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar color={"inherit"}>
@@ -108,7 +106,7 @@ export default function HeaderBer(props) {
               College Sensor
             </Box>
           </Typography>
-          {props.groupButtonVisible && (
+          {props.visibleGroupButton && (
             <>
               <Button color="primary" onClick={handleGroupOpen}>
                 <Box fontWeight={700}>グループIDの追加</Box>
