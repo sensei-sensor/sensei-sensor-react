@@ -35,23 +35,27 @@ export default function App() {
     return isLogin ? children : <Navigate to="/" />;
   };
 
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path={"/"}
-          element={<MainPage isLogin={isLogin} handleLogin={handleLogin} />}
-        />
-        <Route path={"/DisasterPage"} element={<DisasterPage />} />
-        <Route
-          path={"/UserPage"}
-          element={
-            <PrivateRoute>
-              <UserPage isLogin={isLogin} handleLogout={handleLogout} />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
-  );
+  if (isLogin === null) {
+    return <div>Loading...</div>;
+  } else {
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path={"/"}
+            element={<MainPage isLogin={isLogin} handleLogin={handleLogin} />}
+          />
+          <Route path={"/DisasterPage"} element={<DisasterPage />} />
+          <Route
+            path={"/UserPage"}
+            element={
+              <PrivateRoute>
+                <UserPage isLogin={isLogin} handleLogout={handleLogout} />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    );
+  }
 }
