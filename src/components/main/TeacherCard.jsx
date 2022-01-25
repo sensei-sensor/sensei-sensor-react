@@ -1,8 +1,12 @@
 import { Box, Card, CardContent, Typography } from "@mui/material";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/ja";
 import React from "react";
 
 export default function TeacherCard(props) {
-  const convertRelativeTime = () => {};
+  dayjs.extend(relativeTime);
+  dayjs.locale("ja");
 
   return (
     <Box m={2}>
@@ -12,7 +16,7 @@ export default function TeacherCard(props) {
             {props.userName}
           </Typography>
           <Typography mb={1} color="textSecondary">
-            {props.detectionTime}
+            {dayjs(props.detectionTime).fromNow()}
           </Typography>
           <Typography variant="body2" component="p">
             {props.roomName}
