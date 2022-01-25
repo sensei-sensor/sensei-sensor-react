@@ -6,30 +6,50 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 
 export default function PublicationTime() {
-  const [startTime, setStartTime] = React.useState(9);
-  const [endTime, setEndTime] = React.useState(17);
+  const [publicationTime, setPublicationTime] = React.useState({
+    start: 9,
+    end: 17,
+  });
 
   const handleStartTimeChange = (event) => {
-    setStartTime(event.target.value);
+    setPublicationTime.start(event.target.value);
   };
 
   const handleEndTimeChange = (event) => {
-    setEndTime(event.target.value);
+    setPublicationTime.end(event.target.value);
   };
+
+  useEffect(() => {
+    axios
+      .get(
+        import.meta.env.VITE_API_HOST +
+          "sensei-sensor-php/WebAPI/users/publicationTime/",
+        { withCredentials: true }
+      )
+      .then((responce) => {
+        console.log;
+        setPublicationTime({
+          start: responce.data.publicationTime.start / 60,
+          end: responce.data.publicationTime.end / 60,
+        });
+      });
+  }, []);
 
   return (
     <Box display={"flex"} alignItems={"center"}>
       <FormControl sx={{ m: 1, minWidth: 80 }}>
         <InputLabel>開始時間</InputLabel>
         <Select
-          value={startTime}
+          value={publicationTime.start}
           onChange={handleStartTimeChange}
           autoWidth
           label="開始時間"
         >
+          <MenuItem value={8}>8時</MenuItem>
           <MenuItem value={9}>9時</MenuItem>
           <MenuItem value={10}>10時</MenuItem>
           <MenuItem value={11}>11時</MenuItem>
@@ -39,7 +59,7 @@ export default function PublicationTime() {
       <FormControl sx={{ m: 1, minWidth: 80 }}>
         <InputLabel>終了時間</InputLabel>
         <Select
-          value={endTime}
+          value={publicationTime.end}
           onChange={handleEndTimeChange}
           autoWidth
           label="終了時間"
@@ -47,6 +67,7 @@ export default function PublicationTime() {
           <MenuItem value={15}>15時</MenuItem>
           <MenuItem value={16}>16時</MenuItem>
           <MenuItem value={17}>17時</MenuItem>
+          <MenuItem value={18}>18時</MenuItem>
         </Select>
       </FormControl>
       <Typography>まで</Typography>
