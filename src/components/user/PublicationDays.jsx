@@ -1,26 +1,54 @@
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 
 export default function PublicationDays() {
-  const [day, setDay] = React.useState({
+  const [days, setDays] = React.useState({
+    sunday: true,
     monday: true,
     tuesday: true,
     wednesday: true,
     thursday: true,
-    friday: true,
-    all: true,
+    friday: false,
+    saturday: true,
   });
 
   const handleChange = (event) => {
-    setDay({ ...day, [event.target.name]: event.target.checked });
+    axios
+      .put(
+        import.meta.env.VITE_API_HOST +
+          "sensei-sensor-php/WebAPI/users/publicationDays/",
+        {
+          publicationDays: {
+            ...days,
+            [event.target.name]: event.target.checked,
+          },
+        },
+        { withCredentials: true }
+      )
+      .then(() => {
+        setDays({ ...days, [event.target.name]: event.target.checked });
+      });
   };
+
+  useEffect(() => {
+    axios
+      .get(
+        import.meta.env.VITE_API_HOST +
+          "sensei-sensor-php/WebAPI/users/publicationDays/",
+        { withCredentials: true }
+      )
+      .then((responce) => {
+        setDays(responce.data.publicationDays);
+      });
+  }, []);
 
   return (
     <FormGroup row>
       <FormControlLabel
         control={
           <Checkbox
-            checked={day.monday}
+            checked={days.monday}
             onChange={handleChange}
             name="monday"
           />
@@ -30,7 +58,7 @@ export default function PublicationDays() {
       <FormControlLabel
         control={
           <Checkbox
-            checked={day.tuesday}
+            checked={days.tuesday}
             onChange={handleChange}
             name="tuesday"
           />
@@ -40,7 +68,7 @@ export default function PublicationDays() {
       <FormControlLabel
         control={
           <Checkbox
-            checked={day.wednesday}
+            checked={days.wednesday}
             onChange={handleChange}
             name="wednesday"
           />
@@ -50,7 +78,7 @@ export default function PublicationDays() {
       <FormControlLabel
         control={
           <Checkbox
-            checked={day.thursday}
+            checked={days.thursday}
             onChange={handleChange}
             name="thursday"
           />
@@ -60,23 +88,12 @@ export default function PublicationDays() {
       <FormControlLabel
         control={
           <Checkbox
-            checked={day.friday}
+            checked={days.friday}
             onChange={handleChange}
             name="friday"
           />
         }
         label="金曜日"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={day.all}
-            onChange={handleChange}
-            name="all"
-            color={"primary"}
-          />
-        }
-        label="すべて"
       />
     </FormGroup>
   );
