@@ -16,11 +16,41 @@ export default function PublicationTime() {
   });
 
   const handleStartTimeChange = (event) => {
-    setPublicationTime.start(event.target.value);
+    axios
+      .put(
+        import.meta.env.VITE_API_HOST +
+          "sensei-sensor-php/WebAPI/users/publicationTime/",
+        {
+          start: event.target.value * 60,
+          end: publicationTime.end * 60,
+        },
+        { withCredentials: true }
+      )
+      .then(() => {
+        setPublicationTime({
+          start: event.target.value,
+          end: publicationTime.end,
+        });
+      });
   };
 
   const handleEndTimeChange = (event) => {
-    setPublicationTime.end(event.target.value);
+    axios
+      .put(
+        import.meta.env.VITE_API_HOST +
+          "sensei-sensor-php/WebAPI/users/publicationTime/",
+        {
+          start: event.target.value * 60,
+          end: publicationTime.end * 60,
+        },
+        { withCredentials: true }
+      )
+      .then(() => {
+        setPublicationTime({
+          start: publicationTime.start,
+          end: event.target.value,
+        });
+      });
   };
 
   useEffect(() => {
