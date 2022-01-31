@@ -42,7 +42,10 @@ export default function UserPage(props) {
               setSnackbarOpen={setSnackbarOpen}
               setSnackbarStatus={setSnackbarStatus}
             />
-            <PublicationTime />
+            <PublicationTime
+              setSnackbarOpen={setSnackbarOpen}
+              setSnackbarStatus={setSnackbarStatus}
+            />
           </Box>
           <Box mt={3}>
             <PublicationList />
