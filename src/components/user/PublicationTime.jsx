@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 import React, { useEffect } from "react";
 
-export default function PublicationTime() {
+export default function PublicationTime(props) {
   const [publicationTime, setPublicationTime] = React.useState(null);
 
   const handleStartTimeChange = (event) => {
@@ -28,6 +28,18 @@ export default function PublicationTime() {
           start: event.target.value,
           end: publicationTime.end,
         });
+        props.setSnackbarStatus({
+          message: "正常に更新されました",
+          severity: "success",
+        });
+        props.setSnackbarOpen(true);
+      })
+      .catch(() => {
+        props.setSnackbarStatus({
+          message: "更新に失敗しました",
+          severity: "error",
+        });
+        props.setSnackbarOpen(true);
       });
   };
 
@@ -47,6 +59,18 @@ export default function PublicationTime() {
           start: publicationTime.start,
           end: event.target.value,
         });
+        props.setSnackbarStatus({
+          message: "正常に更新されました",
+          severity: "success",
+        });
+        props.setSnackbarOpen(true);
+      })
+      .catch(() => {
+        props.setSnackbarStatus({
+          message: "更新に失敗しました",
+          severity: "error",
+        });
+        props.setSnackbarOpen(true);
       });
   };
 
