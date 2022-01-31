@@ -2,7 +2,7 @@ import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import axios from "axios";
 import React, { useEffect } from "react";
 
-export default function PublicationDays() {
+export default function PublicationDays(props) {
   const [days, setDays] = React.useState(null);
 
   const handleChange = (event) => {
@@ -23,6 +23,18 @@ export default function PublicationDays() {
           ...days,
           [event.target.name]: !event.target.checked,
         });
+        props.setSnackbarStatus({
+          message: "正常に更新されました",
+          severity: "success",
+        });
+        props.setSnackbarOpen(true);
+      })
+      .catch(() => {
+        props.setSnackbarStatus({
+          message: "更新に失敗しました",
+          severity: "error",
+        });
+        props.setSnackbarOpen(true);
       });
   };
 
