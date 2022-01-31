@@ -1,4 +1,11 @@
-import { Box, Container, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Container,
+  Portal,
+  Snackbar,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import GenericTemplate from "../GenericTemplate";
 import GroupList from "../components/user/GroupList";
@@ -7,6 +14,17 @@ import PublicationList from "../components/user/PublicationList";
 import PublicationTime from "../components/user/PublicationTime";
 
 export default function UserPage(props) {
+  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+  const [snackbarStatus, setSnackbarStatus] = React.useState({
+    severity: "success",
+    message: "",
+  });
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+  const vertical = "bottom";
+  const horizontal = "center";
+
   return (
     <GenericTemplate isLogin={props.isLogin} handleLogout={props.handleLogout}>
       <Container>
@@ -20,7 +38,10 @@ export default function UserPage(props) {
             <Typography variant={"h6"}>
               <Box fontWeight={700}>公開時間</Box>
             </Typography>
-            <PublicationDays />
+            <PublicationDays
+              setSnackbarOpen={setSnackbarOpen}
+              setSnackbarStatus={setSnackbarStatus}
+            />
             <PublicationTime />
           </Box>
           <Box mt={3}>
@@ -31,6 +52,23 @@ export default function UserPage(props) {
           </Box>
         </Box>
       </Container>
+      <Portal>
+        <Snackbar
+          anchorOrigin={{ vertical, horizontal }}
+          open={snackbarOpen}
+          autoHideDuration={3000}
+          onClose={handleSnackbarClose}
+          key={vertical + horizontal}
+        >
+          <Alert
+            onClose={handleSnackbarClose}
+            severity={snackbarStatus.severity}
+            sx={{ width: "100%" }}
+          >
+            {snackbarStatus.message}
+          </Alert>
+        </Snackbar>
+      </Portal>
     </GenericTemplate>
   );
 }
