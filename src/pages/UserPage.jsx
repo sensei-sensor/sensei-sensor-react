@@ -1,11 +1,5 @@
-import {
-  Alert,
-  Box,
-  Container,
-  Portal,
-  Snackbar,
-  Typography,
-} from "@mui/material";
+import { Portal } from "@mui/base";
+import { Alert, Box, Container, Snackbar, Typography } from "@mui/material";
 import React from "react";
 import GenericTemplate from "../GenericTemplate";
 import GroupList from "../components/user/GroupList";
