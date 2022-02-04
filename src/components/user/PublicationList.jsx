@@ -71,8 +71,8 @@ export default function PublicationList() {
           "sensei-sensor-php/WebAPI/users/publicationPlace/",
         { withCredentials: true }
       )
-      .then((responce) => {
-        console.log(responce);
+      .then((response) => {
+        console.log(response);
       });
   }, []);
 
