@@ -10,7 +10,8 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 
 function not(a, b) {
   return a.filter((value) => b.indexOf(value) === -1);
@@ -22,18 +23,22 @@ function intersection(a, b) {
 
 export default function PublicationList() {
   const [checked, setChecked] = React.useState([]);
-  const [left, setLeft] = React.useState([0, 1, 2, 3]);
-  const [right, setRight] = React.useState([4, 5, 6, 7]);
+  const [privatePlace, setPrivatePlace] = React.useState(null);
+  const [publicPlace, setPublicPlace] = React.useState(null);
 
-  const leftChecked = intersection(checked, left);
-  const rightChecked = intersection(checked, right);
+  const leftChecked = intersection(checked, privatePlace);
+  const rightChecked = intersection(checked, publicPlace);
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
+  const handleToggle = (value, publication) => () => {
+    const currentIndex = checked.indexOf(
+      publication ? publicPlace[value] : privatePlace[value]
+    );
     const newChecked = [...checked];
 
     if (currentIndex === -1) {
-      newChecked.push(value);
+      publication
+        ? newChecked.push(publicPlace[value])
+        : newChecked.push(privatePlace[value]);
     } else {
       newChecked.splice(currentIndex, 1);
     }
@@ -42,43 +47,82 @@ export default function PublicationList() {
   };
 
   const handleAllRight = () => {
-    setRight(right.concat(left));
-    setLeft([]);
+    setPublicPlace(publicPlace.concat(privatePlace));
+    setPrivatePlace([]);
   };
 
   const handleCheckedRight = () => {
-    setRight(right.concat(leftChecked));
-    setLeft(not(left, leftChecked));
+    setPublicPlace(publicPlace.concat(leftChecked));
+    setPrivatePlace(not(privatePlace, leftChecked));
     setChecked(not(checked, leftChecked));
   };
 
   const handleCheckedLeft = () => {
-    setLeft(left.concat(rightChecked));
-    setRight(not(right, rightChecked));
+    setPrivatePlace(privatePlace.concat(rightChecked));
+    setPublicPlace(not(publicPlace, rightChecked));
     setChecked(not(checked, rightChecked));
   };
 
   const handleAllLeft = () => {
-    setLeft(left.concat(right));
-    setRight([]);
+    setPrivatePlace(privatePlace.concat(publicPlace));
+    setPublicPlace([]);
   };
 
-  const customList = (items) => (
+  useEffect(() => {
+    axios
+      .put(
+        import.meta.env.VITE_API_HOST +
+          "sensei-sensor-php/WebAPI/users/publicationPlace/",
+        {
+          publicationPlace: {
+            public: publicPlace,
+            private: privatePlace,
+          },
+        },
+        { withCredentials: true }
+      )
+      .then(() => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [publicPlace, privatePlace]);
+
+  useEffect(() => {
+    axios
+      .get(
+        import.meta.env.VITE_API_HOST +
+          "sensei-sensor-php/WebAPI/users/publicationPlace/",
+        { withCredentials: true }
+      )
+      .then((response) => {
+        setPublicPlace(response.data.publicationPlace.public);
+        setPrivatePlace(response.data.publicationPlace.private);
+      });
+  }, []);
+
+  const customList = (items, publication) => (
     <Paper sx={{ width: 200, height: 230, overflow: "auto" }}>
       <List dense component="div" role="list">
-        {items.map((value) => {
-          const labelId = `transfer-list-item-${value}-label`;
+        {Object.keys(items).map((value) => {
+          const roomId = publication
+            ? publicPlace[value].roomId
+            : privatePlace[value].roomId;
+          const labelId = `transfer-list-item-${roomId}-label`;
 
           return (
             <ListItem
               key={value}
               role="listItem"
               button
-              onClick={handleToggle(value)}
+              onClick={handleToggle(value, publication)}
             >
               <ListItemIcon>
                 <Checkbox
-                  checked={checked.indexOf(value) !== -1}
+                  checked={
+                    checked.indexOf(
+                      publication ? publicPlace[value] : privatePlace[value]
+                    ) !== -1
+                  }
                   tabIndex={-1}
                   disableRipple
                   inputProps={{
@@ -86,7 +130,14 @@ export default function PublicationList() {
                   }}
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={`List item ${value + 1}`} />
+              <ListItemText
+                id={labelId}
+                primary={`${
+                  publication
+                    ? publicPlace[value].roomName
+                    : privatePlace[value].roomName
+                }`}
+              />
             </ListItem>
           );
         })}
@@ -95,59 +146,63 @@ export default function PublicationList() {
     </Paper>
   );
 
-  return (
-    <>
-      <Typography variant={"h6"}>
-        <Box fontWeight={700}>公開場所</Box>
-      </Typography>
-      <Grid container spacing={2} alignItems="center">
-        <Grid item>非公開{customList(left)}</Grid>
-        <Grid item>
-          <Grid container direction="column">
-            <Button
-              sx={{ my: 0.5 }}
-              variant="outlined"
-              size="small"
-              onClick={handleAllRight}
-              disabled={left.length === 0}
-              aria-label="move all right"
-            >
-              すべて公開
-            </Button>
-            <Button
-              sx={{ my: 0.5 }}
-              variant="outlined"
-              size="small"
-              onClick={handleCheckedRight}
-              disabled={leftChecked.length === 0}
-              aria-label="move selected right"
-            >
-              選択した場所を公開
-            </Button>
-            <Button
-              sx={{ my: 0.5 }}
-              variant="outlined"
-              size="small"
-              onClick={handleCheckedLeft}
-              disabled={rightChecked.length === 0}
-              aria-label="move selected left"
-            >
-              選択した場所を非公開
-            </Button>
-            <Button
-              sx={{ my: 0.5 }}
-              variant="outlined"
-              size="small"
-              onClick={handleAllLeft}
-              disabled={right.length === 0}
-              aria-label="move all left"
-            >
-              すべて非公開
-            </Button>
+  if (publicPlace === null || privatePlace === null) {
+    return <div>Loading</div>;
+  } else {
+    return (
+      <>
+        <Typography variant={"h6"}>
+          <Box fontWeight={700}>公開場所</Box>
+        </Typography>
+        <Grid container spacing={2} alignItems="center">
+          <Grid item>非公開{customList(privatePlace, false)}</Grid>
+          <Grid item>
+            <Grid container direction="column">
+              <Button
+                sx={{ my: 0.5 }}
+                variant="outlined"
+                size="small"
+                onClick={handleAllRight}
+                disabled={privatePlace.length === 0}
+                aria-label="move all right"
+              >
+                すべて公開
+              </Button>
+              <Button
+                sx={{ my: 0.5 }}
+                variant="outlined"
+                size="small"
+                onClick={handleCheckedRight}
+                disabled={leftChecked.length === 0}
+                aria-label="move selected right"
+              >
+                選択した場所を公開
+              </Button>
+              <Button
+                sx={{ my: 0.5 }}
+                variant="outlined"
+                size="small"
+                onClick={handleCheckedLeft}
+                disabled={rightChecked.length === 0}
+                aria-label="move selected left"
+              >
+                選択した場所を非公開
+              </Button>
+              <Button
+                sx={{ my: 0.5 }}
+                variant="outlined"
+                size="small"
+                onClick={handleAllLeft}
+                disabled={publicPlace.length === 0}
+                aria-label="move all left"
+              >
+                すべて非公開
+              </Button>
+            </Grid>
           </Grid>
+          <Grid item>公開{customList(publicPlace, true)}</Grid>
         </Grid>
-        <Grid item>公開{customList(right)}</Grid>
-      </Grid>
-    </>
-  );
+      </>
+    );
+  }
 }
