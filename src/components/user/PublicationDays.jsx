@@ -16,10 +16,8 @@ export default function PublicationDays(props) {
         import.meta.env.VITE_API_HOST +
           "sensei-sensor-php/WebAPI/users/publicationDays/",
         {
-          publicationDays: {
-            ...days,
-            [event.target.name]: event.target.checked,
-          },
+          ...days,
+          [event.target.name]: event.target.checked,
         },
         { withCredentials: true }
       )
@@ -51,7 +49,7 @@ export default function PublicationDays(props) {
         { withCredentials: true }
       )
       .then((response) => {
-        setDays(response.data.publicationDays);
+        setDays(response.data);
       });
   }, []);
 

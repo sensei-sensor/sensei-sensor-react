@@ -52,10 +52,8 @@ export default function PublicationTime(props) {
         import.meta.env.VITE_API_HOST +
           "sensei-sensor-php/WebAPI/users/publicationTime/",
         {
-          publicationTime: {
-            start: publicationTime.start * 60,
-            end: event.target.value * 60,
-          },
+          start: publicationTime.start * 60,
+          end: event.target.value * 60,
         },
         { withCredentials: true }
       )
@@ -88,8 +86,8 @@ export default function PublicationTime(props) {
       )
       .then((response) => {
         setPublicationTime({
-          start: response.data.publicationTime.start / 60,
-          end: response.data.publicationTime.end / 60,
+          start: response.data.start / 60,
+          end: response.data.end / 60,
         });
       });
   }, []);
