@@ -12,7 +12,7 @@ export default function DisasterPage() {
     axios
       .get(import.meta.env.VITE_API_HOST + "sensei-sensor-php/WebAPI/disaster/")
       .then((res) => {
-        setNotFound(res.data.NotFoundUserList);
+        setNotFound(res.data.notFoundUserList);
         setDiscovery(res.data.discoveryUserList);
         console.log(res.data);
       })
