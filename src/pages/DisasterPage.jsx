@@ -1,16 +1,19 @@
-import { Box, Container, Typography } from "@mui/material";
+import { LinearProgress } from "@mui/material";
 import axios from "axios";
 import React, { useEffect } from "react";
 import GenericTemplate from "../GenericTemplate";
+import GroupContainer from "../components/main/GroupContainer";
 
 export default function DisasterPage() {
-  const [disaster, setDisaster] = React.useState(null);
+  const [notFound, setNotFound] = React.useState(null);
+  const [discovery, setDiscovery] = React.useState(null);
 
   useEffect(() => {
     axios
       .get(import.meta.env.VITE_API_HOST + "sensei-sensor-php/WebAPI/disaster/")
       .then((res) => {
-        setDisaster(res.data);
+        setNotFound(res.data.notFoundUserList);
+        setDiscovery(res.data.discoveryUserList);
         console.log(res.data);
       })
       .catch((error) => {
@@ -18,39 +21,21 @@ export default function DisasterPage() {
       });
   }, []);
 
-  if (disaster === null) {
-    return <div>Loading...</div>;
+  if (notFound === null || discovery === null) {
+    return <LinearProgress />;
   } else {
     return (
       <GenericTemplate>
-        <Container>
-          <Box
-            borderRadius={5}
-            m={3}
-            p={2}
-            textAlign={"center"}
-            bgcolor={"white"}
-          >
-            <Typography variant={"h5"}>
-              <Box fontWeight={700}>このセンサーで検出済み</Box>
-            </Typography>
-          </Box>
-        </Container>
-        <Container>
-          <Box
-            borderRadius={5}
-            m={3}
-            p={2}
-            textAlign={"center"}
-            bgcolor={"white"}
-          >
-            <Typography variant={"h5"}>
-              <Box fontWeight={700} color={"red"}>
-                このセンサーで未検出
-              </Box>
-            </Typography>
-          </Box>
-        </Container>
+        <GroupContainer groupName={"未検出"} users={notFound} />
+        {Object.keys(discovery).map((key) => {
+          return (
+            <GroupContainer
+              key={key}
+              groupName={discovery[key].roomName + " のセンサーで検出"}
+              users={discovery[key].users}
+            />
+          );
+        })}
       </GenericTemplate>
     );
   }
