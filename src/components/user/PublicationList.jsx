@@ -3,6 +3,7 @@ import {
   Button,
   Checkbox,
   Grid,
+  LinearProgress,
   List,
   ListItem,
   ListItemIcon,
@@ -147,7 +148,7 @@ export default function PublicationList() {
   );
 
   if (publicPlace === null || privatePlace === null) {
-    return <div>Loading...</div>;
+    return <LinearProgress />;
   } else {
     return (
       <>

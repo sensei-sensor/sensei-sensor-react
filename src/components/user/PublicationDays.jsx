@@ -1,4 +1,9 @@
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import {
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  LinearProgress,
+} from "@mui/material";
 import axios from "axios";
 import React, { useEffect } from "react";
 
@@ -51,7 +56,7 @@ export default function PublicationDays(props) {
   }, []);
 
   if (days === null) {
-    return <div>Loading...</div>;
+    return <LinearProgress />;
   } else {
     return (
       <FormGroup row>

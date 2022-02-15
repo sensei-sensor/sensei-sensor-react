@@ -1,3 +1,4 @@
+import { LinearProgress } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
@@ -36,7 +37,7 @@ export default function App() {
   };
 
   if (isLogin === null) {
-    return <div>Loading...</div>;
+    return <LinearProgress />;
   } else {
     return (
       <BrowserRouter>
