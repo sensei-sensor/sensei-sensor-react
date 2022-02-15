@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, LinearProgress, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect } from "react";
 import GenericTemplate from "../GenericTemplate";
@@ -19,7 +19,7 @@ export default function DisasterPage() {
   }, []);
 
   if (disaster === null) {
-    return <div>Loading...</div>;
+    return <LinearProgress />;
   } else {
     return (
       <GenericTemplate>

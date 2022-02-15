@@ -60,18 +60,20 @@ export default function HeaderBer(props) {
         <Box fontWeight={700}>ログアウト</Box>
       </Button>
     );
-  } else if (props.isLogin) {
+  } else if (location.pathname === "/" && props.isLogin) {
     button = (
       <Button color="primary" onClick={handleMyPageClick}>
         <Box fontWeight={700}>マイページ</Box>
       </Button>
     );
-  } else {
+  } else if (location.pathname === "/" && !props.isLogin) {
     button = (
       <Button color="primary" onClick={handleLoginOpen}>
         <Box fontWeight={700}>先生向けログイン</Box>
       </Button>
     );
+  } else {
+    button = null;
   }
 
   return (
