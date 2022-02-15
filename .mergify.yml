@@ -1,0 +1,15 @@
+queue_rules:
+  - name: default
+    conditions:
+      - check-success=build
+
+pull_request_rules:
+  - name: automatic merge for Dependabot pull requests
+    conditions:
+      - author~=^dependabot(|-preview)\[bot\]$
+      - check-success=build
+    actions:
+      queue:
+        method: merge
+        name: default
+
