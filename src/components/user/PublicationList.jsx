@@ -3,6 +3,7 @@ import {
   Button,
   Checkbox,
   Grid,
+  LinearProgress,
   List,
   ListItem,
   ListItemIcon,
@@ -95,8 +96,8 @@ export default function PublicationList() {
         { withCredentials: true }
       )
       .then((response) => {
-        setPublicPlace(response.data.publicationPlace.public);
-        setPrivatePlace(response.data.publicationPlace.private);
+        setPublicPlace(response.data.public);
+        setPrivatePlace(response.data.private);
       });
   }, []);
 
@@ -147,7 +148,7 @@ export default function PublicationList() {
   );
 
   if (publicPlace === null || privatePlace === null) {
-    return <div>Loading</div>;
+    return <LinearProgress />;
   } else {
     return (
       <>

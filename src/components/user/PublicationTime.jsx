@@ -2,6 +2,7 @@ import {
   Box,
   FormControl,
   InputLabel,
+  LinearProgress,
   MenuItem,
   Select,
   Typography,
@@ -94,7 +95,7 @@ export default function PublicationTime(props) {
   }, []);
 
   if (publicationTime === null) {
-    return null;
+    return <LinearProgress />;
   } else {
     return (
       <Box display={"flex"} alignItems={"center"}>
