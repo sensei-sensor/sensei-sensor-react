@@ -51,7 +51,7 @@ export default function PublicationDays(props) {
   }, []);
 
   if (days === null) {
-    return null;
+    return <div>Loading...</div>;
   } else {
     return (
       <FormGroup row>

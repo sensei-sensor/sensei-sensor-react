@@ -94,7 +94,7 @@ export default function PublicationTime(props) {
   }, []);
 
   if (publicationTime === null) {
-    return null;
+    return <div>Loading...</div>;
   } else {
     return (
       <Box display={"flex"} alignItems={"center"}>
