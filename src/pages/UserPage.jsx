@@ -1,6 +1,7 @@
 import { Portal } from "@mui/base";
 import { Alert, Box, Container, Snackbar, Typography } from "@mui/material";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import GenericTemplate from "../GenericTemplate";
 import GroupList from "../components/user/GroupList";
 import PublicationDays from "../components/user/PublicationDays";
@@ -8,8 +9,9 @@ import PublicationList from "../components/user/PublicationList";
 import PublicationTime from "../components/user/PublicationTime";
 
 export default function UserPage(props) {
-  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
-  const [snackbarStatus, setSnackbarStatus] = React.useState({
+  const [userPage, setUserPage] = useState(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarStatus, setSnackbarStatus] = useState({
     severity: "success",
     message: "",
   });
@@ -18,6 +20,19 @@ export default function UserPage(props) {
   };
   const vertical = "bottom";
   const horizontal = "center";
+
+  useEffect(() => {
+    axios
+      .get(import.meta.env.VITE_API_HOST + "sensei-sensor-php/WebAPI/user/", {
+        withCredentials: true,
+      })
+      .then((response) => {
+        setUserPage(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <GenericTemplate isLogin={props.isLogin} handleLogout={props.handleLogout}>
