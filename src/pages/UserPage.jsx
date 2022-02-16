@@ -42,9 +42,15 @@ export default function UserPage(props) {
             />
           </Box>
           <Box mt={3}>
+            <Typography variant={"h6"}>
+              <Box fontWeight={700}>公開場所</Box>
+            </Typography>
             <PublicationList />
           </Box>
           <Box mt={3}>
+            <Typography variant={"h6"}>
+              <Box fontWeight={700}>グループ設定</Box>
+            </Typography>
             <GroupList />
           </Box>
         </Box>

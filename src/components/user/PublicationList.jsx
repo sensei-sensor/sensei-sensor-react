@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Checkbox,
   Grid,
@@ -9,7 +8,6 @@ import {
   ListItemIcon,
   ListItemText,
   Paper,
-  Typography,
 } from "@mui/material";
 import axios from "axios";
 import React, { useEffect } from "react";
@@ -152,9 +150,6 @@ export default function PublicationList() {
   } else {
     return (
       <>
-        <Typography variant={"h6"}>
-          <Box fontWeight={700}>公開場所</Box>
-        </Typography>
         <Grid container spacing={2} alignItems="center">
           <Grid item>非公開{customList(privatePlace, false)}</Grid>
           <Grid item>

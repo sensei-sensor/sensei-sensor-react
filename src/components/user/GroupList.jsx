@@ -1,12 +1,10 @@
 import { ControlPoint, Delete, Edit } from "@mui/icons-material";
 import {
-  Box,
   Button,
   IconButton,
   List,
   ListItem,
   ListItemText,
-  Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import EditGroupModal from "../../modals/EditGroupModal";
@@ -18,14 +16,9 @@ export default function GroupList() {
 
   return (
     <>
-      <Box display={"flex"} alignItems={"center"}>
-        <Typography variant={"h6"}>
-          <Box fontWeight={700}>グループ設定</Box>
-        </Typography>
-        <IconButton edge="end" aria-label="グループを追加">
-          <ControlPoint />
-        </IconButton>
-      </Box>
+      <IconButton edge="end" aria-label="グループを追加">
+        <ControlPoint />
+      </IconButton>
       <List>
         <ListItem
           secondaryAction={
