@@ -20,7 +20,7 @@ function intersection(a, b) {
   return a.filter((value) => b.indexOf(value) !== -1);
 }
 
-export default function PublicationList() {
+export default function PublicationList(props) {
   const [checked, setChecked] = React.useState([]);
   const [privatePlace, setPrivatePlace] = React.useState(null);
   const [publicPlace, setPublicPlace] = React.useState(null);
@@ -48,26 +48,30 @@ export default function PublicationList() {
   const handleAllRight = () => {
     setPublicPlace(publicPlace.concat(privatePlace));
     setPrivatePlace([]);
+    handleChange();
   };
 
   const handleCheckedRight = () => {
     setPublicPlace(publicPlace.concat(leftChecked));
     setPrivatePlace(not(privatePlace, leftChecked));
     setChecked(not(checked, leftChecked));
+    handleChange();
   };
 
   const handleCheckedLeft = () => {
     setPrivatePlace(privatePlace.concat(rightChecked));
     setPublicPlace(not(publicPlace, rightChecked));
     setChecked(not(checked, rightChecked));
+    handleChange();
   };
 
   const handleAllLeft = () => {
     setPrivatePlace(privatePlace.concat(publicPlace));
     setPublicPlace([]);
+    handleChange();
   };
 
-  useEffect(() => {
+  const handleChange = () => {
     axios
       .put(
         import.meta.env.VITE_API_HOST +
@@ -80,11 +84,21 @@ export default function PublicationList() {
         },
         { withCredentials: true }
       )
-      .then(() => {})
-      .catch((err) => {
-        console.log(err);
+      .then(() => {
+        props.setSnackbarStatus({
+          message: "正常に更新されました",
+          severity: "success",
+        });
+        props.setSnackbarOpen(true);
+      })
+      .catch(() => {
+        props.setSnackbarStatus({
+          message: "更新に失敗しました",
+          severity: "error",
+        });
+        props.setSnackbarOpen(true);
       });
-  }, [publicPlace, privatePlace]);
+  };
 
   useEffect(() => {
     axios

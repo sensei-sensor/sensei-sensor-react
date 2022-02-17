@@ -45,7 +45,10 @@ export default function UserPage(props) {
             <Typography variant={"h6"}>
               <Box fontWeight={700}>公開場所</Box>
             </Typography>
-            <PublicationList />
+            <PublicationList
+              setSnackbarOpen={setSnackbarOpen}
+              setSnackbarStatus={setSnackbarStatus}
+            />
           </Box>
           <Box mt={3}>
             <Typography variant={"h6"}>
