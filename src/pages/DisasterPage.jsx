@@ -27,15 +27,7 @@ export default function DisasterPage() {
     return (
       <GenericTemplate>
         <GroupContainer groupName={"未検出"} users={notFound} />
-        {Object.keys(discovery).map((key) => {
-          return (
-            <GroupContainer
-              key={key}
-              groupName={discovery[key].roomName + " のセンサーで検出"}
-              users={discovery[key].users}
-            />
-          );
-        })}
+        <GroupContainer groupName={"検出済み"} users={discovery} />
       </GenericTemplate>
     );
   }
