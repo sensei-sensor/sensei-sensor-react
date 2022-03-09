@@ -27,7 +27,7 @@
     "@mui/base": "^5.0.0-alpha.71",
     "@mui/icons-material": "^5.5.0",
     "@mui/material": "^5.5.0",
-    "axios": "^0.26.0",
+    "axios": "^0.26.1",
     "dayjs": "^1.10.8",
     "history": "^5.3.0",
     "react": "^17.0.0",
